@@ -4,74 +4,63 @@
 using namespace cocos2d;
 using namespace CocosDenshion;
 
-CCScene* HelloWorld::scene()
-{
-    // 'scene' is an autorelease object
+CCScene* HelloWorld::scene() {
     CCScene *scene = CCScene::create();
-    
-    // 'layer' is an autorelease object
     HelloWorld *layer = HelloWorld::create();
-
-    // add layer as a child to scene
     scene->addChild(layer);
-
-    // return the scene
     return scene;
 }
 
-// on "init" you need to initialize your instance
-bool HelloWorld::init()
-{
-    //////////////////////////////
-    // 1. super init first
-    if ( !CCLayer::init() )
-    {
-        return false;
-    }
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-                                        "CloseNormal.png",
-                                        "CloseSelected.png",
-                                        this,
-                                        menu_selector(HelloWorld::menuCloseCallback) );
-    pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
-
-    // create menu, it's an autorelease object
-    CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-    pMenu->setPosition( CCPointZero );
-    this->addChild(pMenu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-    CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Thonburi", 34);
-
-    // ask director the window size
-    CCSize size = CCDirector::sharedDirector()->getWinSize();
-
-    // position the label on the center of the screen
-    pLabel->setPosition( ccp(size.width / 2, size.height - 20) );
-
-    // add the label as a child to this layer
-    this->addChild(pLabel, 1);
-
-    // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
-
-    // position the sprite on the center of the screen
-    pSprite->setPosition( ccp(size.width/2, size.height/2) );
-
-    // add the sprite as a child to this layer
-    this->addChild(pSprite, 0);
-    
+bool HelloWorld::init() {
+    if (!CCLayer::init()) return false;
+    HelloWorld::addTileMap();
+    CCSprite *background = CCSprite::create("FramgiaLogo.png");
+    background->setPosition(ccp(winSize.width/2, winSize.height/2));
+    this->addChild(background, -1, -1);
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
     return true;
+}
+
+void HelloWorld::addTileMap () {
+    map = CCTMXTiledMap::create("NewTile.tmx");
+    this->addChild(map, 0, 0);
+    CCArray *pChildrenArray = map->getChildren();
+    CCObject *pObject = NULL;
+    CCSpriteBatchNode *child = NULL;
+    CCARRAY_FOREACH(pChildrenArray, pObject) {
+        child = ((CCSpriteBatchNode *)pObject);
+        if (!child) break;
+        child->getTexture()->setAntiAliasTexParameters();
+    }
+    CCLog("Map width: %f length: %f; Map position X:%f Y:%f",map->getContentSize().width, map->getContentSize().height, map->getPositionX(), map->getPositionY());
+}
+
+bool HelloWorld::touchPosValidation(CCPoint touchLoc) {
+    if (touchLoc.x < 0 || touchLoc.y <0 || touchLoc.x >= map->getContentSize().width || touchLoc.y >= map->getContentSize().height) return  false;
+    else return true;
+}
+
+bool HelloWorld::ccTouchBegan(CCTouch *touch, CCEvent *event) {
+    return true;
+}
+
+void HelloWorld::ccTouchMoved (CCTouch *touch, CCEvent *event) {
+   
+}
+
+void HelloWorld::ccTouchEnded(CCTouch *touch, CCEvent *event) {
+    CCPoint touchLoc = this->getParent()->convertTouchToNodeSpace(touch);
+    CCPoint convertedPoint = CCDirector::sharedDirector()->convertToGL(touchLoc);
+    
+    if (HelloWorld::touchPosValidation(convertedPoint)) {
+        CCTMXLayer *layer = map->layerNamed("Tile Layer 1");
+        CCSprite *tile0 = layer->tileAt(ccp(1,5));
+        unsigned int m_gid = layer->tileGIDAt(touchLoc);
+        CCLog("Tile ID: %i", m_gid);
+        //CCLog("Tile location X:%f Y:%f ", tile0->getPositionX(), tile0->getPositionY());
+        tile0->runAction(CCRemoveSelf::create());
+    }
+    else CCLog("Invalid Position");
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender)

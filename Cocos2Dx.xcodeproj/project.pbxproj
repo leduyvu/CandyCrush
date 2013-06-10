@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8496669D1765B89C00621605 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669C1765B89C00621605 /* HelloWorld.png */; };
+		8496669F1765B8B000621605 /* FramgiaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669E1765B8B000621605 /* FramgiaLogo.png */; };
+		849666A71765C51A00621605 /* Tile.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 849666A61765C51A00621605 /* Tile.tmx */; };
+		849666AA1765C71A00621605 /* GameTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 849666A81765C71A00621605 /* GameTile.png */; };
+		849666AB1765C71A00621605 /* WoodWall.png in Resources */ = {isa = PBXBuildFile; fileRef = 849666A91765C71A00621605 /* WoodWall.png */; };
+		849666AD1765C83600621605 /* NewTile.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 849666AC1765C83600621605 /* NewTile.tmx */; };
+		849666AF1765C86000621605 /* Tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 849666AE1765C86000621605 /* Tiles.png */; };
 		DC12FB681744D21300480D31 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC12FB671744D21300480D31 /* QuartzCore.framework */; };
 		DC12FB6A1744D21300480D31 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC12FB691744D21300480D31 /* OpenGLES.framework */; };
 		DC12FB6C1744D21300480D31 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC12FB6B1744D21300480D31 /* OpenAL.framework */; };
@@ -18,7 +25,6 @@
 		DC12FB7A1744D21400480D31 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB791744D21400480D31 /* CloseNormal.png */; };
 		DC12FB7C1744D21400480D31 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB7B1744D21400480D31 /* CloseSelected.png */; };
 		DC12FB7E1744D21400480D31 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB7D1744D21400480D31 /* Default.png */; };
-		DC12FB801744D21400480D31 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB7F1744D21400480D31 /* HelloWorld.png */; };
 		DC12FB821744D21400480D31 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB811744D21400480D31 /* Icon-72.png */; };
 		DC12FB841744D21400480D31 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB831744D21400480D31 /* Icon-Small-50.png */; };
 		DC12FB861744D21400480D31 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FB851744D21400480D31 /* Icon-Small.png */; };
@@ -271,6 +277,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8496669C1765B89C00621605 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloWorld.png; path = Resources/HelloWorld.png; sourceTree = "<group>"; };
+		8496669E1765B8B000621605 /* FramgiaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FramgiaLogo.png; sourceTree = "<group>"; };
+		849666A61765C51A00621605 /* Tile.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tile.tmx; sourceTree = "<group>"; };
+		849666A81765C71A00621605 /* GameTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameTile.png; sourceTree = "<group>"; };
+		849666A91765C71A00621605 /* WoodWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WoodWall.png; sourceTree = "<group>"; };
+		849666AC1765C83600621605 /* NewTile.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = NewTile.tmx; sourceTree = "<group>"; };
+		849666AE1765C86000621605 /* Tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tiles.png; sourceTree = "<group>"; };
 		DC12FB641744D21300480D31 /* Cocos2Dx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocos2Dx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC12FB671744D21300480D31 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DC12FB691744D21300480D31 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -283,7 +296,6 @@
 		DC12FB791744D21400480D31 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseNormal.png; path = Resources/CloseNormal.png; sourceTree = "<group>"; };
 		DC12FB7B1744D21400480D31 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseSelected.png; path = Resources/CloseSelected.png; sourceTree = "<group>"; };
 		DC12FB7D1744D21400480D31 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
-		DC12FB7F1744D21400480D31 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloWorld.png; path = Resources/HelloWorld.png; sourceTree = "<group>"; };
 		DC12FB811744D21400480D31 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Resources/Icon-72.png"; sourceTree = "<group>"; };
 		DC12FB831744D21400480D31 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Resources/Icon-Small-50.png"; sourceTree = "<group>"; };
 		DC12FB851744D21400480D31 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Resources/Icon-Small.png"; sourceTree = "<group>"; };
@@ -860,6 +872,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		849666A01765C41500621605 /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				8496669C1765B89C00621605 /* HelloWorld.png */,
+				DC12FB791744D21400480D31 /* CloseNormal.png */,
+				DC12FB7B1744D21400480D31 /* CloseSelected.png */,
+				DC12FB7D1744D21400480D31 /* Default.png */,
+				DC12FB811744D21400480D31 /* Icon-72.png */,
+				DC12FB831744D21400480D31 /* Icon-Small-50.png */,
+				DC12FB851744D21400480D31 /* Icon-Small.png */,
+				DC12FB871744D21400480D31 /* Icon-Small@2x.png */,
+				DC12FB891744D21400480D31 /* Icon.png */,
+				DC12FB8B1744D21400480D31 /* Icon@2x.png */,
+				DC12FB8D1744D21400480D31 /* iTunesArtwork */,
+				DC12FB8F1744D21400480D31 /* Info.plist */,
+			);
+			name = Default;
+			sourceTree = "<group>";
+		};
+		849666A51765C51A00621605 /* Crusher */ = {
+			isa = PBXGroup;
+			children = (
+				849666AE1765C86000621605 /* Tiles.png */,
+				849666AC1765C83600621605 /* NewTile.tmx */,
+				849666A81765C71A00621605 /* GameTile.png */,
+				849666A91765C71A00621605 /* WoodWall.png */,
+				849666A61765C51A00621605 /* Tile.tmx */,
+			);
+			path = Crusher;
+			sourceTree = "<group>";
+		};
 		DC12FB5B1744D21300480D31 = {
 			isa = PBXGroup;
 			children = (
@@ -908,18 +951,9 @@
 		DC12FB781744D21400480D31 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DC12FB791744D21400480D31 /* CloseNormal.png */,
-				DC12FB7B1744D21400480D31 /* CloseSelected.png */,
-				DC12FB7D1744D21400480D31 /* Default.png */,
-				DC12FB7F1744D21400480D31 /* HelloWorld.png */,
-				DC12FB811744D21400480D31 /* Icon-72.png */,
-				DC12FB831744D21400480D31 /* Icon-Small-50.png */,
-				DC12FB851744D21400480D31 /* Icon-Small.png */,
-				DC12FB871744D21400480D31 /* Icon-Small@2x.png */,
-				DC12FB891744D21400480D31 /* Icon.png */,
-				DC12FB8B1744D21400480D31 /* Icon@2x.png */,
-				DC12FB8D1744D21400480D31 /* iTunesArtwork */,
-				DC12FB8F1744D21400480D31 /* Info.plist */,
+				849666A51765C51A00621605 /* Crusher */,
+				849666A01765C41500621605 /* Default */,
+				8496669E1765B8B000621605 /* FramgiaLogo.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2045,7 +2079,6 @@
 				DC12FB7A1744D21400480D31 /* CloseNormal.png in Resources */,
 				DC12FB7C1744D21400480D31 /* CloseSelected.png in Resources */,
 				DC12FB7E1744D21400480D31 /* Default.png in Resources */,
-				DC12FB801744D21400480D31 /* HelloWorld.png in Resources */,
 				DC12FB821744D21400480D31 /* Icon-72.png in Resources */,
 				DC12FB841744D21400480D31 /* Icon-Small-50.png in Resources */,
 				DC12FB861744D21400480D31 /* Icon-Small.png in Resources */,
@@ -2056,6 +2089,13 @@
 				DC12FC2A1744D21A00480D31 /* ChangeLog in Resources */,
 				DC12FD941744D22700480D31 /* project.pbxproj in Resources */,
 				DC12FEE91744D3A300480D31 /* Default-568h@2x.png in Resources */,
+				8496669D1765B89C00621605 /* HelloWorld.png in Resources */,
+				8496669F1765B8B000621605 /* FramgiaLogo.png in Resources */,
+				849666A71765C51A00621605 /* Tile.tmx in Resources */,
+				849666AA1765C71A00621605 /* GameTile.png in Resources */,
+				849666AB1765C71A00621605 /* WoodWall.png in Resources */,
+				849666AD1765C83600621605 /* NewTile.tmx in Resources */,
+				849666AF1765C86000621605 /* Tiles.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2440,6 +2480,7 @@
 				DC12FEE41744D22E00480D31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

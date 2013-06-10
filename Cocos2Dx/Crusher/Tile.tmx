@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="7" height="7" tilewidth="90" tileheight="90">
+ <tileset firstgid="1" name="WoodWall" tilewidth="90" tileheight="90">
+  <image source="WoodWall.png" trans="4b637f" width="960" height="640"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="7" height="7">
+  <data encoding="base64" compression="zlib">
+   eJwtwzcSglAUAMCPqA2iNgrYgKExNsbGeP9DucXbmc1SSpk9c/sOHFrEkaVjJ06dxbmVtY0L29i5dOXajdu4c+/BoyfP8eLVm3cfPuPLtx+//vwDohcGWQ==
+  </data>
+ </layer>
+</map>
