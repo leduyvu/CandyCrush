@@ -14,6 +14,9 @@ public:
     void menuCloseCallback(CCObject* pSender);
     void addTileMap();
     bool touchPosValidation(CCPoint touchLoc);
+    CCPoint tileCoorForPosition(CCPoint position);
+    CCPoint positionForTileCoor(CCPoint tileCoor);
+    void createFixture(CCTMXLayer *layer);
     virtual bool ccTouchBegan(CCTouch *touch, CCEvent *event);
     virtual void ccTouchMoved(CCTouch *touch, CCEvent *event);
     virtual void ccTouchEnded(CCTouch *touch, CCEvent *event);
