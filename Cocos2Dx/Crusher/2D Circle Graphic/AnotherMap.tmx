@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="7" height="7" tilewidth="80" tileheight="80">
+ <tileset firstgid="1" name="BigTile" tilewidth="80" tileheight="80">
+  <image source="BigTile.png" trans="ffffff" width="560" height="560"/>
+ </tileset>
+ <layer name="Grids" width="7" height="7">
+  <data encoding="base64" compression="zlib">
+   eJwNw4kSgVAAAMDnzk0SOYqcufv/n7M7s40QQtOWbTt27RnZd+DQkWMnTp05N3Zh4tLUlWszN27duTe38ODR0pNnL169ebfy4dOXbz9+/Vn7B0Y3BMo=
+  </data>
+ </layer>
+</map>

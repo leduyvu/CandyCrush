@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="7" height="7" tilewidth="90" tileheight="90">
+ <tileset firstgid="1" name="GameTile" tilewidth="90" tileheight="90">
+  <image source="GameTile.png" trans="ffffff" width="360" height="360"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="7" height="7">
+  <data encoding="base64" compression="zlib">
+   eJwNw4cRgkAAALBfwY5dEVEsoFixs/9SJndphBCatmzbsWvPyL4Dh44cO3HqzLmxCxOXpq5cm7lx6869uYUHj5aePHvx6s27lQ+fvnz78evP2j94hgfa
+  </data>
+ </layer>
+</map>
