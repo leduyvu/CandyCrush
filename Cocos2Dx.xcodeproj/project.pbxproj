@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843B6F2517681F25008D8A4C /* Candy.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2417681F25008D8A4C /* Candy.png */; };
+		843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2617682CAA008D8A4C /* SwipeSprite.png */; };
 		8496669D1765B89C00621605 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669C1765B89C00621605 /* HelloWorld.png */; };
 		8496669F1765B8B000621605 /* FramgiaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669E1765B8B000621605 /* FramgiaLogo.png */; };
 		849666A71765C51A00621605 /* Tile.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 849666A61765C51A00621605 /* Tile.tmx */; };
@@ -14,6 +16,11 @@
 		849666AB1765C71A00621605 /* WoodWall.png in Resources */ = {isa = PBXBuildFile; fileRef = 849666A91765C71A00621605 /* WoodWall.png */; };
 		849666AD1765C83600621605 /* NewTile.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 849666AC1765C83600621605 /* NewTile.tmx */; };
 		849666AF1765C86000621605 /* Tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 849666AE1765C86000621605 /* Tiles.png */; };
+		84C569181768333800FC5C80 /* SwipeLeftRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C569171768333800FC5C80 /* SwipeLeftRight.png */; };
+		84C5691A17683C9000FC5C80 /* SwipeUpDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C5691917683C9000FC5C80 /* SwipeUpDown.png */; };
+		84DA2876176702B200E179E7 /* BigTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DA2875176702B200E179E7 /* BigTile.png */; };
+		84DA28BD1767033800E179E7 /* AnotherMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 84DA28BC1767033800E179E7 /* AnotherMap.tmx */; };
+		84DA28BF1767064000E179E7 /* PuzzleBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 84DA28BE1767064000E179E7 /* PuzzleBackgroud.png */; };
 		DC12FB681744D21300480D31 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC12FB671744D21300480D31 /* QuartzCore.framework */; };
 		DC12FB6A1744D21300480D31 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC12FB691744D21300480D31 /* OpenGLES.framework */; };
 		DC12FB6C1744D21300480D31 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC12FB6B1744D21300480D31 /* OpenAL.framework */; };
@@ -277,6 +284,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		843B6F2417681F25008D8A4C /* Candy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy.png; sourceTree = "<group>"; };
+		843B6F2617682CAA008D8A4C /* SwipeSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwipeSprite.png; sourceTree = "<group>"; };
+		8477D0801766FB4E007C16FA /* ATile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ATile.png; sourceTree = "<group>"; };
+		8477D0811766FB60007C16FA /* TileMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TileMap.tmx; sourceTree = "<group>"; };
 		8496669C1765B89C00621605 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloWorld.png; path = Resources/HelloWorld.png; sourceTree = "<group>"; };
 		8496669E1765B8B000621605 /* FramgiaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FramgiaLogo.png; sourceTree = "<group>"; };
 		849666A61765C51A00621605 /* Tile.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tile.tmx; sourceTree = "<group>"; };
@@ -284,6 +295,11 @@
 		849666A91765C71A00621605 /* WoodWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WoodWall.png; sourceTree = "<group>"; };
 		849666AC1765C83600621605 /* NewTile.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = NewTile.tmx; sourceTree = "<group>"; };
 		849666AE1765C86000621605 /* Tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tiles.png; sourceTree = "<group>"; };
+		84C569171768333800FC5C80 /* SwipeLeftRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwipeLeftRight.png; sourceTree = "<group>"; };
+		84C5691917683C9000FC5C80 /* SwipeUpDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwipeUpDown.png; sourceTree = "<group>"; };
+		84DA2875176702B200E179E7 /* BigTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BigTile.png; sourceTree = "<group>"; };
+		84DA28BC1767033800E179E7 /* AnotherMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = AnotherMap.tmx; path = "2D Circle Graphic/AnotherMap.tmx"; sourceTree = "<group>"; };
+		84DA28BE1767064000E179E7 /* PuzzleBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PuzzleBackgroud.png; sourceTree = "<group>"; };
 		DC12FB641744D21300480D31 /* Cocos2Dx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocos2Dx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC12FB671744D21300480D31 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DC12FB691744D21300480D31 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -894,6 +910,15 @@
 		849666A51765C51A00621605 /* Crusher */ = {
 			isa = PBXGroup;
 			children = (
+				84C5691917683C9000FC5C80 /* SwipeUpDown.png */,
+				84C569171768333800FC5C80 /* SwipeLeftRight.png */,
+				843B6F2617682CAA008D8A4C /* SwipeSprite.png */,
+				843B6F2417681F25008D8A4C /* Candy.png */,
+				84DA28BE1767064000E179E7 /* PuzzleBackgroud.png */,
+				84DA2875176702B200E179E7 /* BigTile.png */,
+				84DA28BC1767033800E179E7 /* AnotherMap.tmx */,
+				8477D0811766FB60007C16FA /* TileMap.tmx */,
+				8477D0801766FB4E007C16FA /* ATile.png */,
 				849666AE1765C86000621605 /* Tiles.png */,
 				849666AC1765C83600621605 /* NewTile.tmx */,
 				849666A81765C71A00621605 /* GameTile.png */,
@@ -2096,6 +2121,13 @@
 				849666AB1765C71A00621605 /* WoodWall.png in Resources */,
 				849666AD1765C83600621605 /* NewTile.tmx in Resources */,
 				849666AF1765C86000621605 /* Tiles.png in Resources */,
+				84DA2876176702B200E179E7 /* BigTile.png in Resources */,
+				84DA28BD1767033800E179E7 /* AnotherMap.tmx in Resources */,
+				84DA28BF1767064000E179E7 /* PuzzleBackgroud.png in Resources */,
+				843B6F2517681F25008D8A4C /* Candy.png in Resources */,
+				843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */,
+				84C569181768333800FC5C80 /* SwipeLeftRight.png in Resources */,
+				84C5691A17683C9000FC5C80 /* SwipeUpDown.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
