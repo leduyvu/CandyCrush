@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8434C46D176ABA3200C8E722 /* TileData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46C176ABA3200C8E722 /* TileData.plist */; };
+		8434C471176AD40100C8E722 /* Candy2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46E176AD40100C8E722 /* Candy2.png */; };
+		8434C472176AD40100C8E722 /* Candy3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46F176AD40100C8E722 /* Candy3.png */; };
+		8434C473176AD40100C8E722 /* Candy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C470176AD40100C8E722 /* Candy4.png */; };
 		843B6F2517681F25008D8A4C /* Candy.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2417681F25008D8A4C /* Candy.png */; };
 		843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2617682CAA008D8A4C /* SwipeSprite.png */; };
 		8496669D1765B89C00621605 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669C1765B89C00621605 /* HelloWorld.png */; };
@@ -284,12 +288,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8434C46C176ABA3200C8E722 /* TileData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TileData.plist; sourceTree = "<group>"; };
+		8434C46E176AD40100C8E722 /* Candy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy2.png; sourceTree = "<group>"; };
+		8434C46F176AD40100C8E722 /* Candy3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy3.png; sourceTree = "<group>"; };
+		8434C470176AD40100C8E722 /* Candy4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy4.png; sourceTree = "<group>"; };
 		843B6F2417681F25008D8A4C /* Candy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy.png; sourceTree = "<group>"; };
 		843B6F2617682CAA008D8A4C /* SwipeSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwipeSprite.png; sourceTree = "<group>"; };
 		8477D0801766FB4E007C16FA /* ATile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ATile.png; sourceTree = "<group>"; };
 		8477D0811766FB60007C16FA /* TileMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TileMap.tmx; sourceTree = "<group>"; };
 		8496669C1765B89C00621605 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloWorld.png; path = Resources/HelloWorld.png; sourceTree = "<group>"; };
-		8496669E1765B8B000621605 /* FramgiaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FramgiaLogo.png; sourceTree = "<group>"; };
+		8496669E1765B8B000621605 /* FramgiaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FramgiaLogo.png; path = ../FramgiaLogo.png; sourceTree = "<group>"; };
 		849666A61765C51A00621605 /* Tile.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tile.tmx; sourceTree = "<group>"; };
 		849666A81765C71A00621605 /* GameTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameTile.png; sourceTree = "<group>"; };
 		849666A91765C71A00621605 /* WoodWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WoodWall.png; sourceTree = "<group>"; };
@@ -888,6 +896,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8434C46B176AB96400C8E722 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8434C46C176ABA3200C8E722 /* TileData.plist */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		849666A01765C41500621605 /* Default */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +926,10 @@
 		849666A51765C51A00621605 /* Crusher */ = {
 			isa = PBXGroup;
 			children = (
+				8434C46E176AD40100C8E722 /* Candy2.png */,
+				8434C46F176AD40100C8E722 /* Candy3.png */,
+				8434C470176AD40100C8E722 /* Candy4.png */,
+				8496669E1765B8B000621605 /* FramgiaLogo.png */,
 				84C5691917683C9000FC5C80 /* SwipeUpDown.png */,
 				84C569171768333800FC5C80 /* SwipeLeftRight.png */,
 				843B6F2617682CAA008D8A4C /* SwipeSprite.png */,
@@ -976,9 +996,9 @@
 		DC12FB781744D21400480D31 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8434C46B176AB96400C8E722 /* Data */,
 				849666A51765C51A00621605 /* Crusher */,
 				849666A01765C41500621605 /* Default */,
-				8496669E1765B8B000621605 /* FramgiaLogo.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2128,6 +2148,10 @@
 				843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */,
 				84C569181768333800FC5C80 /* SwipeLeftRight.png in Resources */,
 				84C5691A17683C9000FC5C80 /* SwipeUpDown.png in Resources */,
+				8434C46D176ABA3200C8E722 /* TileData.plist in Resources */,
+				8434C471176AD40100C8E722 /* Candy2.png in Resources */,
+				8434C472176AD40100C8E722 /* Candy3.png in Resources */,
+				8434C473176AD40100C8E722 /* Candy4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2385,7 +2409,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Minh Nghiem (LE4D3QM9ST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Minh Nghiem (LE4D3QM9ST)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2407,7 +2432,9 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "9DEB5905-AEE7-4596-AB75-242777F82D88";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DEB5905-AEE7-4596-AB75-242777F82D88";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2417,7 +2444,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Minh Nghiem (LE4D3QM9ST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Minh Nghiem (LE4D3QM9ST)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -2436,8 +2464,10 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "9DEB5905-AEE7-4596-AB75-242777F82D88";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9DEB5905-AEE7-4596-AB75-242777F82D88";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

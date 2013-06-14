@@ -11,6 +11,8 @@ private:
     
     CCSprite *tileSprite;
     CCSprite *pickedSprite;
+    CCSprite *movingSprite;
+    CCSprite *swapSprite;
     
     CCSprite *swipeRightSprite;
     CCSprite *swipeLeftSprite;
@@ -26,6 +28,7 @@ private:
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     
     bool spriteChosen;
+    bool spriteContained;
     
     bool swiping;
     bool swipeRecognized;
@@ -39,6 +42,7 @@ private:
     bool swipeLeftAllowed;
     bool swipeDownAllowed;
     bool swipeRightAllowed;
+    
 public:
     virtual bool init();
     static cocos2d::CCScene* scene();
@@ -54,13 +58,19 @@ public:
     CCPoint tileCoorForPosition(CCPoint position);
     CCPoint positionForTileCoor(CCPoint tileCoor);
     
+    CCSprite *getRightTileByTag(int tag);
+    
     void setSwipeNavigation();
     void removeSwipeNavigation();
+    void checkTiles();
+    void swapTiles(int spriteTag, int swapTag);
     
     void swipedUp(CCSprite *sprite);
     void swipedDown(CCSprite *sprite);
     void swipedLeft(CCSprite *sprite);
     void swipedRight(CCSprite *sprite);
+    
+    void propertiesCheck(CCDictionary *dict);
     
     virtual bool ccTouchBegan(CCTouch *touch, CCEvent *event);
     virtual void ccTouchMoved(CCTouch *touch, CCEvent *event);
