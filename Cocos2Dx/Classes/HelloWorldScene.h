@@ -23,6 +23,7 @@ private:
     
     CCArray *spriteArray;
     CCArray *tileArray;
+    CCArray *component;
     
     CCTMXTiledMap *map;
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
@@ -43,6 +44,8 @@ private:
     bool swipeDownAllowed;
     bool swipeRightAllowed;
     
+    int tileDimentionArray[49];
+    const char *plistPath = "TileData.plist";
 public:
     virtual bool init();
     static cocos2d::CCScene* scene();
@@ -63,6 +66,7 @@ public:
     void setSwipeNavigation();
     void removeSwipeNavigation();
     void checkTiles();
+    void checkTileCombo(CCSprite *sprite);
     void swapTiles(int spriteTag, int swapTag);
     
     void swipedUp(CCSprite *sprite);

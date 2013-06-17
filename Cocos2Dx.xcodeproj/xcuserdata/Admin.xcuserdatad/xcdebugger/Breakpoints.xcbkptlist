@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Cocos2Dx/Classes/HelloWorldScene.cpp"
-         timestampString = "392884874.425072"
+         timestampString = "393157712.018272"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "238"
-         endingLineNumber = "238"
+         startingLineNumber = "254"
+         endingLineNumber = "254"
          landmarkName = "HelloWorld::addTileMap ()"
          landmarkType = "5">
       </FileBreakpoint>
