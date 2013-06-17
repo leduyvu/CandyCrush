@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "Component.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -16,15 +17,27 @@ CCScene* HelloWorld::scene() {
 
 bool HelloWorld::init() {
     if (!CCLayer::init()) return false;
+    
     spriteArray = new CCArray;
     tileArray = new CCArray;
+    component = new CCArray;
+    
     HelloWorld::addTileMap();
+    
     CCSprite *background = CCSprite::create("PuzzleBackgroud.png");
     background->setPosition(ccp(winSize.width/2, winSize.height/2));
     //this->addChild(background, -2, -2);
     
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
     this->scheduleUpdate();
+    
+    CCObject *object;
+    CCARRAY_FOREACH(component, object) {
+        Component *cp = (Component*)(object);
+        CCLog("ID: %i -Location :%i", cp->getID()+1,cp->getLocation()-300);
+        
+    }
+    
     return true;
 }
 
@@ -156,6 +169,7 @@ void HelloWorld::swipedRight(CCSprite *sprite) {
         
         sprite->setTag(thisSpriteTag+1);
         swapSprite->setTag(thisSpriteTag);
+        HelloWorld::checkTiles();
     }
 }
 
@@ -163,7 +177,6 @@ void HelloWorld::swipedLeft(CCSprite *sprite) {
     CCPoint spritePosition = sprite->getPosition();
     CCPoint translatePosition = HelloWorld::tileCoorForPosition(spritePosition);
     unsigned int gid = layer->tileGIDAt(translatePosition);
-    CCLog("id %i", gid);
     if (gid != 1 && gid != 8 && gid != 15 && gid != 22 && gid != 29 && gid != 36 && gid != 43 ) {
         CCPoint destination = ccp(spritePosition.x - map->getTileSize().width, spritePosition.y);
         sprite->runAction(CCMoveTo::create(0.3, destination));
@@ -177,6 +190,7 @@ void HelloWorld::swipedLeft(CCSprite *sprite) {
         
         sprite->setTag(thisSpriteTag-1);
         swapSprite->setTag(thisSpriteTag);
+        HelloWorld::checkTiles();
     }
 }
 
@@ -197,6 +211,7 @@ void HelloWorld::swipedUp(CCSprite *sprite) {
         
         sprite->setTag(thisSpriteTag-7);
         swapSprite->setTag(thisSpriteTag);
+        HelloWorld::checkTiles();
     }
 }
 
@@ -217,6 +232,7 @@ void HelloWorld::swipedDown(CCSprite *sprite) {
         
         sprite->setTag(thisSpriteTag+7);
         swapSprite->setTag(thisSpriteTag);
+        HelloWorld::checkTiles();
     }
 }
 
@@ -240,17 +256,12 @@ void HelloWorld::addTileMap () {
 
 void HelloWorld::createFixture(CCTMXLayer* layer) {
     CCSize layerSize = layer->getLayerSize();
-    CCDictionary *plistDictionary = CCDictionary::createWithContentsOfFile("TileData.plist");
     for (int y = 0; y < layerSize.height; y++) {
         for (int x = 0; x < layerSize.width; x++) {
             tileSprite = layer->tileAt(ccp(x, y));
             unsigned int m_gid = layer->tileGIDAt(ccp(x, y));
             tileSprite->setTag(x);
             tileArray->addObject(tileSprite);
-            
-//            CCLog("Tile Sprite tag %i", tileSprite->getTag());
-//            CCLog("Tile position [x%i, y%i]x:%f ,y%f", x, y, tileSprite->getPositionX(), tileSprite->getPositionY());
-//            CCLog("Tile position [x%i, y%i] has id:%i", x, y, m_gid);
             
             char stringID[10];
             sprintf(stringID, "%d", m_gid);
@@ -260,12 +271,15 @@ void HelloWorld::createFixture(CCTMXLayer* layer) {
                                      tileSprite->getPositionY() + tileSprite->getContentSize().height/2));
             this->addChild(labelID, 0, 99);
             
-            char tileName[4][20];
+            char tileName[7][20];
             strcpy(tileName[0], "Candy");
             strcpy(tileName[1], "Candy2");
             strcpy(tileName[2], "Candy3");
             strcpy(tileName[3], "Candy4");
-            int randomTile = rand() %4;
+            strcpy(tileName[4], "Candy5");
+            strcpy(tileName[5], "Candy6");
+            strcpy(tileName[6], "Candy7");
+            int randomTile = rand() %7;
             char spriteName[100];
             sprintf(spriteName, "%s.png", tileName[randomTile]);
             CCSprite *randomTileSprite = CCSprite::create(spriteName);
@@ -275,25 +289,10 @@ void HelloWorld::createFixture(CCTMXLayer* layer) {
             this->addChild(randomTileSprite, 3, mgidTag);
             spriteArray->addObject(randomTileSprite);
             
-            char tileNumber[100];
-            sprintf(tileNumber, "Tile%i", m_gid);
-            CCDictionary *singleTile = (CCDictionary*)plistDictionary->objectForKey(tileNumber);
+            tileDimentionArray[m_gid] = randomTile;
             
-            CCString *newXCoor = CCString::createWithFormat("%f", HelloWorld::tileCoorForPosition(randomTileSprite->getPosition()).x);
-            CCString *newYCoor = CCString::createWithFormat("%f", HelloWorld::tileCoorForPosition(randomTileSprite->getPosition()).y);
-            CCString *newXPos = CCString::createWithFormat("%f", randomTileSprite->getPositionX() + tileSprite->getContentSize().width/2);
-            CCString *newYPos = CCString::createWithFormat("%f", randomTileSprite->getPositionY() + tileSprite->getContentSize().height/2);
-            CCString *newType = CCString::createWithFormat("%i", randomTile);
-            CCString *newTag = CCString::createWithFormat("%i", mgidTag);
-            
-            singleTile->setObject(newXCoor, "xCoor");
-            singleTile->setObject(newYCoor, "yCoor");
-            singleTile->setObject(newXPos, "xPos");
-            singleTile->setObject(newYPos, "yPos");
-            singleTile->setObject(newType, "type");
-            singleTile->setObject(newTag, "tag");
-            
-            HelloWorld::propertiesCheck(singleTile);
+            Component *cp =new Component(randomTile,mgidTag);
+            component->addObject(cp);
         }
     }
 }
@@ -308,7 +307,7 @@ void HelloWorld::letThereBeACandy(CCTMXLayer *layer) {
     CCSprite *tempSprite = CCSprite::create();
     tempSprite = layer->tileAt(ccp(3, 3));
     CCLog("Temp Sprite tag %i", tempSprite->getTag());
-    
+
     CCSprite *tempSprite2 = CCSprite::create();
     tempSprite2 = layer->tileAt(ccp(5, 5));
     CCLog("Temp Sprite tag %i", tempSprite2->getTag());
@@ -336,48 +335,19 @@ CCPoint HelloWorld::positionForTileCoor(CCPoint tileCoor) {
 }
 
 CCSprite *HelloWorld::getRightTileByTag(int tag) {
-    char tileNumber[100];
-    sprintf(tileNumber, "Tile%i", tag - 300);
-    CCLog("%s", tileNumber);
-    CCDictionary *plistDictionary = CCDictionary::createWithContentsOfFile("TileData.plist");
-    CCDictionary *singleTile = (CCDictionary*)plistDictionary->objectForKey(tileNumber);
-    
-    int xCoor = singleTile->valueForKey("xCoor")->intValue();
-    int yCoor = singleTile->valueForKey("yCoor")->intValue();
-    
-    CCLog("This tile xCoor:%i yCoor:%i", xCoor, yCoor);
-    CCLog("Right tile xCoor:%i yCoor:%i", xCoor +1, yCoor);
-    
-    unsigned int m_gid = layer->tileGIDAt(ccp(xCoor +1, yCoor));
-    CCLog("Right tile ID: %i", m_gid);
-    
-    swapSprite->getChildByTag(tag + 1);
-    
-    //HelloWorld::swapTiles(tag, m_gid);
-    
-    return swapSprite;
+    return NULL;
 }
 
 void HelloWorld::swapTiles(int spriteTag, int swapSpriteTag) {
-    char tileNumber[100];
-    sprintf(tileNumber, "Tile%i", spriteTag - 300);
-    CCDictionary *plistDictionary = CCDictionary::createWithContentsOfFile("TileData.plist");
-    CCDictionary *singleTile = (CCDictionary*)plistDictionary->objectForKey(tileNumber);
-    CCString *type = CCString::createWithFormat("%i",  singleTile->valueForKey("type")->intValue());
-    
-    char swapNumber[100];
-    sprintf(swapNumber, "Tile%i", swapSpriteTag - 300);
-    
-    CCDictionary *swapTile = (CCDictionary*)plistDictionary->objectForKey(swapNumber);
-    CCString *typeSwap = CCString::createWithFormat("%i",  swapTile->valueForKey("type")->intValue());
-    singleTile->setObject(typeSwap, "type");
-    swapTile->setObject(type, "type");
+
 }
 
 void HelloWorld::checkTiles() {
-    CCObject *object;
-    CCARRAY_FOREACH(spriteArray, object) {
-    }
+    
+}
+
+void HelloWorld::checkTileCombo(CCSprite *sprite) {
+    
 }
 
 #pragma mark Swipe Navigation
@@ -419,19 +389,7 @@ void HelloWorld::removeSwipeNavigation() {
 #pragma mark Debug
 
 void HelloWorld::propertiesCheck(CCDictionary *singleTile) {
-    int xCoor, yCoor, xPos, yPos, type, tag;
-    xCoor = singleTile->valueForKey("xCoor")->intValue();
-    yCoor = singleTile->valueForKey("yCoor")->intValue();
-    xPos = singleTile->valueForKey("xPos")->intValue();
-    yPos = singleTile->valueForKey("yPos")->intValue();
-    type = singleTile->valueForKey("type")->intValue();
-    tag = singleTile->valueForKey("tag")->intValue();
-    CCLog("Tile %i x Coor %i", tag - 300, xCoor);
-    CCLog("Tile %i y Coor %i", tag - 300, yCoor);
-    CCLog("Tile %i x Pos %i", tag - 300, xPos);
-    CCLog("Tile %i y Pos %i", tag - 300, yPos);
-    CCLog("Tile %i type %i", tag - 300, type);
-    CCLog("Tile %i tag %i", tag - 300, tag);
+
 }
 
 void HelloWorld::menuCloseCallback(CCObject* pSender) {

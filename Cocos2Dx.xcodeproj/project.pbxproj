@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8434C46D176ABA3200C8E722 /* TileData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46C176ABA3200C8E722 /* TileData.plist */; };
 		8434C471176AD40100C8E722 /* Candy2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46E176AD40100C8E722 /* Candy2.png */; };
 		8434C472176AD40100C8E722 /* Candy3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46F176AD40100C8E722 /* Candy3.png */; };
 		8434C473176AD40100C8E722 /* Candy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C470176AD40100C8E722 /* Candy4.png */; };
+		8434C476176EAEDF00C8E722 /* BiggerMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8434C474176EAEDF00C8E722 /* BiggerMap.tmx */; };
+		8434C477176EAEDF00C8E722 /* BiggerTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C475176EAEDF00C8E722 /* BiggerTile.png */; };
+		8434C47B176EB5EE00C8E722 /* Candy5.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C478176EB5EE00C8E722 /* Candy5.png */; };
+		8434C47C176EB5EE00C8E722 /* Candy6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C479176EB5EE00C8E722 /* Candy6.png */; };
+		8434C47D176EB5EE00C8E722 /* Candy7.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C47A176EB5EE00C8E722 /* Candy7.png */; };
 		843B6F2517681F25008D8A4C /* Candy.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2417681F25008D8A4C /* Candy.png */; };
 		843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2617682CAA008D8A4C /* SwipeSprite.png */; };
+		84658C38176F1B4000F518A6 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84658C36176F1B4000F518A6 /* Component.cpp */; };
 		8496669D1765B89C00621605 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669C1765B89C00621605 /* HelloWorld.png */; };
 		8496669F1765B8B000621605 /* FramgiaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669E1765B8B000621605 /* FramgiaLogo.png */; };
 		849666A71765C51A00621605 /* Tile.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 849666A61765C51A00621605 /* Tile.tmx */; };
@@ -288,12 +293,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8434C46C176ABA3200C8E722 /* TileData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TileData.plist; sourceTree = "<group>"; };
 		8434C46E176AD40100C8E722 /* Candy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy2.png; sourceTree = "<group>"; };
 		8434C46F176AD40100C8E722 /* Candy3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy3.png; sourceTree = "<group>"; };
 		8434C470176AD40100C8E722 /* Candy4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy4.png; sourceTree = "<group>"; };
+		8434C474176EAEDF00C8E722 /* BiggerMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = BiggerMap.tmx; sourceTree = "<group>"; };
+		8434C475176EAEDF00C8E722 /* BiggerTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BiggerTile.png; sourceTree = "<group>"; };
+		8434C478176EB5EE00C8E722 /* Candy5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy5.png; sourceTree = "<group>"; };
+		8434C479176EB5EE00C8E722 /* Candy6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy6.png; sourceTree = "<group>"; };
+		8434C47A176EB5EE00C8E722 /* Candy7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy7.png; sourceTree = "<group>"; };
 		843B6F2417681F25008D8A4C /* Candy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy.png; sourceTree = "<group>"; };
 		843B6F2617682CAA008D8A4C /* SwipeSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwipeSprite.png; sourceTree = "<group>"; };
+		84658C36176F1B4000F518A6 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
+		84658C37176F1B4000F518A6 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
 		8477D0801766FB4E007C16FA /* ATile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ATile.png; sourceTree = "<group>"; };
 		8477D0811766FB60007C16FA /* TileMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TileMap.tmx; sourceTree = "<group>"; };
 		8496669C1765B89C00621605 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloWorld.png; path = Resources/HelloWorld.png; sourceTree = "<group>"; };
@@ -899,7 +910,6 @@
 		8434C46B176AB96400C8E722 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				8434C46C176ABA3200C8E722 /* TileData.plist */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -926,6 +936,11 @@
 		849666A51765C51A00621605 /* Crusher */ = {
 			isa = PBXGroup;
 			children = (
+				8434C478176EB5EE00C8E722 /* Candy5.png */,
+				8434C479176EB5EE00C8E722 /* Candy6.png */,
+				8434C47A176EB5EE00C8E722 /* Candy7.png */,
+				8434C474176EAEDF00C8E722 /* BiggerMap.tmx */,
+				8434C475176EAEDF00C8E722 /* BiggerTile.png */,
 				8434C46E176AD40100C8E722 /* Candy2.png */,
 				8434C46F176AD40100C8E722 /* Candy3.png */,
 				8434C470176AD40100C8E722 /* Candy4.png */,
@@ -2063,6 +2078,8 @@
 		DC12FED91744D22E00480D31 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				84658C36176F1B4000F518A6 /* Component.cpp */,
+				84658C37176F1B4000F518A6 /* Component.h */,
 				DC12FEDA1744D22E00480D31 /* AppDelegate.h */,
 				DC12FEDB1744D22E00480D31 /* AppDelegate.cpp */,
 				DC12FEDD1744D22E00480D31 /* HelloWorldScene.h */,
@@ -2148,10 +2165,14 @@
 				843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */,
 				84C569181768333800FC5C80 /* SwipeLeftRight.png in Resources */,
 				84C5691A17683C9000FC5C80 /* SwipeUpDown.png in Resources */,
-				8434C46D176ABA3200C8E722 /* TileData.plist in Resources */,
 				8434C471176AD40100C8E722 /* Candy2.png in Resources */,
 				8434C472176AD40100C8E722 /* Candy3.png in Resources */,
 				8434C473176AD40100C8E722 /* Candy4.png in Resources */,
+				8434C476176EAEDF00C8E722 /* BiggerMap.tmx in Resources */,
+				8434C477176EAEDF00C8E722 /* BiggerTile.png in Resources */,
+				8434C47B176EB5EE00C8E722 /* Candy5.png in Resources */,
+				8434C47C176EB5EE00C8E722 /* Candy6.png in Resources */,
+				8434C47D176EB5EE00C8E722 /* Candy7.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2399,6 +2420,7 @@
 				DC12FEDC1744D22E00480D31 /* AppDelegate.cpp in Sources */,
 				DC12FEDF1744D22E00480D31 /* HelloWorldScene.cpp in Sources */,
 				DC12FEE71744D31F00480D31 /* CCDataVisitor.cpp in Sources */,
+				84658C38176F1B4000F518A6 /* Component.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
