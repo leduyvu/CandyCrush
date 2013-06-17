@@ -7,38 +7,30 @@
 //
 
 #include "Component.h"
+
 using namespace cocos2d;
 using namespace std;
 USING_NS_CC;
-#pragma mark Default
+
 Component::Component(int id, int location)
 {
-    this->id=id;
+    this->colorId=id;
     this->location=location;
-    //this->image=image;
 }
 
 void Component::setID(int id)
 {
-    this->id=id;
+    this->colorId=id;
 }
 void Component::setLocation(int c)
 {
     this->location = c;
 }
-void Component::setImage(string str)
-{
-    image = str;
-}
 int Component::getID()
 {
-    return this->id;
+    return this->colorId;
 }
 int Component::getLocation()
 {
     return location;
-}
-string Component::getImage()
-{
-    return image;
 }
