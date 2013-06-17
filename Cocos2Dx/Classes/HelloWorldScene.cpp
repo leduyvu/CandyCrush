@@ -363,38 +363,15 @@ void HelloWorld::swapTiles(int spriteTag, int swapSpriteTag) {
     sprintf(tileNumber, "Tile%i", spriteTag - 300);
     CCDictionary *plistDictionary = CCDictionary::createWithContentsOfFile("TileData.plist");
     CCDictionary *singleTile = (CCDictionary*)plistDictionary->objectForKey(tileNumber);
-    CCString *xCoor = CCString::createWithFormat("%i", singleTile->valueForKey("xCoor")->intValue());
-    CCString *yCoor = CCString::createWithFormat("%i", singleTile->valueForKey("yCoor")->intValue());
-    CCString *xPos = CCString::createWithFormat("%i",  singleTile->valueForKey("xPos")->intValue());
-    CCString *yPos = CCString::createWithFormat("%i",  singleTile->valueForKey("yPos")->intValue());
     CCString *type = CCString::createWithFormat("%i",  singleTile->valueForKey("type")->intValue());
-    CCString *tag = CCString::createWithFormat("%i",  singleTile->valueForKey("tag")->intValue());
     
     char swapNumber[100];
     sprintf(swapNumber, "Tile%i", swapSpriteTag - 300);
+    
     CCDictionary *swapTile = (CCDictionary*)plistDictionary->objectForKey(swapNumber);
-
-    CCString *xSwapCoor = CCString::createWithFormat("%i",  swapTile->valueForKey("xCoor")->intValue());
-    CCString *ySwapCoor = CCString::createWithFormat("%i",  swapTile->valueForKey("yCoor")->intValue());
-    CCString *xSwapPos = CCString::createWithFormat("%i",  swapTile->valueForKey("xPos")->intValue());
-    CCString *ySwapPos = CCString::createWithFormat("%i",  swapTile->valueForKey("yPos")->intValue());
     CCString *typeSwap = CCString::createWithFormat("%i",  swapTile->valueForKey("type")->intValue());
-    CCString *tagSwap = CCString::createWithFormat("%i",  swapTile->valueForKey("tag")->intValue());
-    
-    singleTile->setObject(xSwapCoor, "xCoor");
-    singleTile->setObject(ySwapCoor, "yCoor");
-    singleTile->setObject(xSwapPos, "xPos");
-    singleTile->setObject(ySwapPos, "yPos");
     singleTile->setObject(typeSwap, "type");
-    singleTile->setObject(tagSwap, "tag");
-    
-    swapTile->setObject(xCoor, "xCoor");
-    swapTile->setObject(yCoor, "yCoor");
-    swapTile->setObject(xPos, "xPos");
-    swapTile->setObject(yPos, "yPos");
     swapTile->setObject(type, "type");
-    swapTile->setObject(tag, "tag");
-    
 }
 
 void HelloWorld::checkTiles() {
