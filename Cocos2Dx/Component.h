@@ -9,20 +9,18 @@
 #ifndef Cocos2Dx_Component_h
 #define Cocos2Dx_Component_h
 #include "cocos2d.h"
-//#include "string.h"
+using namespace std;
 USING_NS_CC;
 class Component : public cocos2d::CCObject{
 private:
     int location;
-    int id ;
-    std::string image;
+    int colorId;
 public:
-    Component(int id ,int location);
+    Component(int colorId ,int location);
     void setLocation(int c);
-    void setID(int id);
-    void setImage(std::string str);
+    void setID(int colorId);
+    void setImage(string str);
     int getLocation();
     int getID();
-    std::string getImage();
  };
 #endif
