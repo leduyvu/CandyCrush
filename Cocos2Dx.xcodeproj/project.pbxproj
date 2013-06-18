@@ -17,7 +17,7 @@
 		8434C47D176EB5EE00C8E722 /* Candy7.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C47A176EB5EE00C8E722 /* Candy7.png */; };
 		843B6F2517681F25008D8A4C /* Candy.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2417681F25008D8A4C /* Candy.png */; };
 		843B6F2717682CAA008D8A4C /* SwipeSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 843B6F2617682CAA008D8A4C /* SwipeSprite.png */; };
-		84658C38176F1B4000F518A6 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84658C36176F1B4000F518A6 /* Component.cpp */; };
+		84658C38176F1B4000F518A6 /* CCObjectExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84658C36176F1B4000F518A6 /* CCObjectExtension.cpp */; };
 		8496669D1765B89C00621605 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669C1765B89C00621605 /* HelloWorld.png */; };
 		8496669F1765B8B000621605 /* FramgiaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8496669E1765B8B000621605 /* FramgiaLogo.png */; };
 		849666A71765C51A00621605 /* Tile.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 849666A61765C51A00621605 /* Tile.tmx */; };
@@ -303,8 +303,8 @@
 		8434C47A176EB5EE00C8E722 /* Candy7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy7.png; sourceTree = "<group>"; };
 		843B6F2417681F25008D8A4C /* Candy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy.png; sourceTree = "<group>"; };
 		843B6F2617682CAA008D8A4C /* SwipeSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwipeSprite.png; sourceTree = "<group>"; };
-		84658C36176F1B4000F518A6 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
-		84658C37176F1B4000F518A6 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		84658C36176F1B4000F518A6 /* CCObjectExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCObjectExtension.cpp; sourceTree = "<group>"; };
+		84658C37176F1B4000F518A6 /* CCObjectExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCObjectExtension.h; sourceTree = "<group>"; };
 		8477D0801766FB4E007C16FA /* ATile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ATile.png; sourceTree = "<group>"; };
 		8477D0811766FB60007C16FA /* TileMap.tmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TileMap.tmx; sourceTree = "<group>"; };
 		8496669C1765B89C00621605 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloWorld.png; path = Resources/HelloWorld.png; sourceTree = "<group>"; };
@@ -2078,8 +2078,8 @@
 		DC12FED91744D22E00480D31 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				84658C36176F1B4000F518A6 /* Component.cpp */,
-				84658C37176F1B4000F518A6 /* Component.h */,
+				84658C36176F1B4000F518A6 /* CCObjectExtension.cpp */,
+				84658C37176F1B4000F518A6 /* CCObjectExtension.h */,
 				DC12FEDA1744D22E00480D31 /* AppDelegate.h */,
 				DC12FEDB1744D22E00480D31 /* AppDelegate.cpp */,
 				DC12FEDD1744D22E00480D31 /* HelloWorldScene.h */,
@@ -2420,7 +2420,7 @@
 				DC12FEDC1744D22E00480D31 /* AppDelegate.cpp in Sources */,
 				DC12FEDF1744D22E00480D31 /* HelloWorldScene.cpp in Sources */,
 				DC12FEE71744D31F00480D31 /* CCDataVisitor.cpp in Sources */,
-				84658C38176F1B4000F518A6 /* Component.cpp in Sources */,
+				84658C38176F1B4000F518A6 /* CCObjectExtension.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

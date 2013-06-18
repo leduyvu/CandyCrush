@@ -6,31 +6,31 @@
 //
 //
 
-#include "Component.h"
+#include "CCObjectExtension.h"
 
 using namespace cocos2d;
 using namespace std;
 USING_NS_CC;
 
-Component::Component(int id, int location)
+CCObjectExtension::CCObjectExtension(int id, int location)
 {
     this->colorId=id;
     this->location=location;
 }
 
-void Component::setID(int id)
+void CCObjectExtension::setID(int id)
 {
     this->colorId=id;
 }
-void Component::setLocation(int c)
+void CCObjectExtension::setLocation(int c)
 {
     this->location = c;
 }
-int Component::getID()
+int CCObjectExtension::getID()
 {
     return this->colorId;
 }
-int Component::getLocation()
+int CCObjectExtension::getLocation()
 {
     return location;
 }
