@@ -6,17 +6,17 @@
 //
 //
 
-#ifndef Cocos2Dx_Component_h
-#define Cocos2Dx_Component_h
+#ifndef Cocos2Dx_CCObjectExtension_h
+#define Cocos2Dx_CCObjectExtension_h
 #include "cocos2d.h"
 using namespace std;
 USING_NS_CC;
-class Component : public cocos2d::CCObject{
+class CCObjectExtension : public cocos2d::CCObject{
 private:
     int location;
     int colorId;
 public:
-    Component(int colorId ,int location);
+    CCObjectExtension(int colorId ,int location);
     void setLocation(int c);
     void setID(int colorId);
     void setImage(string str);

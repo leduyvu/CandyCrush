@@ -1,6 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include "Component.h"
+#include "CCObjectExtension.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -16,11 +16,13 @@ CCScene* HelloWorld::scene() {
 }
 
 bool HelloWorld::init() {
+    srand(time(0));
     if (!CCLayer::init()) return false;
     
     spriteArray = new CCArray;
     tileArray = new CCArray;
-    component = new CCArray;
+    colorArray = new CCArray;
+    toDestroyArray = new CCArray;
     
     HelloWorld::addTileMap();
     
@@ -30,14 +32,6 @@ bool HelloWorld::init() {
     
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
     this->scheduleUpdate();
-    
-    CCObject *object;
-    CCARRAY_FOREACH(component, object) {
-        Component *cp = (Component*)(object);
-        CCLog("ID: %i -Location :%i", cp->getID()+1,cp->getLocation()-300);
-        
-    }
-    
     return true;
 }
 
@@ -157,19 +151,25 @@ void HelloWorld::swipedRight(CCSprite *sprite) {
     CCPoint translatePosition = HelloWorld::tileCoorForPosition(spritePosition);
     unsigned int gid = layer->tileGIDAt(translatePosition);
     if (gid != 7 && gid != 14 && gid != 21 && gid != 28 && gid != 35 && gid != 42 && gid != 49 ) {
-        CCPoint destination = ccp(spritePosition.x + map->getTileSize().width, spritePosition.y);
-        sprite->runAction(CCMoveTo::create(0.3, destination));
-        int thisSpriteTag = sprite->getTag();
         
-        CCLog("This sprite tag : %i", thisSpriteTag);
-        
-        swapSprite = (CCSprite*)this->getChildByTag(thisSpriteTag +1);
-        swapSprite->runAction(CCMoveTo::create(0.3, sprite->getPosition()));
-        HelloWorld::swapTiles(thisSpriteTag, thisSpriteTag+1);
-        
-        sprite->setTag(thisSpriteTag+1);
-        swapSprite->setTag(thisSpriteTag);
-        HelloWorld::checkTiles();
+        CCObject *colorObject;
+        CCARRAY_FOREACH(colorArray, colorObject) {
+            CCObjectExtension *cp = (CCObjectExtension*)(colorObject);
+            if (cp->getLocation() == gid) {
+                int colorID = cp->getID();
+                if (HelloWorld::isTileMatched(gid+1, colorID)) {
+                    CCLog("Combo exist at tile %i", gid+1);
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() + 1);
+                    HelloWorld::swapTilesMoving(sprite, toSwapSprite);
+                    HelloWorld::swapColorID(gid, gid+1);
+                }
+                else {
+                    CCLog("Combo doesn't exist");
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() + 1);
+                    HelloWorld::swapTilesReturn(sprite, toSwapSprite);
+                }
+            }
+        }
     }
 }
 
@@ -178,19 +178,24 @@ void HelloWorld::swipedLeft(CCSprite *sprite) {
     CCPoint translatePosition = HelloWorld::tileCoorForPosition(spritePosition);
     unsigned int gid = layer->tileGIDAt(translatePosition);
     if (gid != 1 && gid != 8 && gid != 15 && gid != 22 && gid != 29 && gid != 36 && gid != 43 ) {
-        CCPoint destination = ccp(spritePosition.x - map->getTileSize().width, spritePosition.y);
-        sprite->runAction(CCMoveTo::create(0.3, destination));
-        int thisSpriteTag = sprite->getTag();
-        
-        CCLog("This sprite tag : %i", thisSpriteTag);
-        
-        swapSprite = (CCSprite*)this->getChildByTag(thisSpriteTag -1);
-        swapSprite->runAction(CCMoveTo::create(0.3, sprite->getPosition()));
-        HelloWorld::swapTiles(thisSpriteTag, thisSpriteTag-1);
-        
-        sprite->setTag(thisSpriteTag-1);
-        swapSprite->setTag(thisSpriteTag);
-        HelloWorld::checkTiles();
+        CCObject *colorObject;
+        CCARRAY_FOREACH(colorArray, colorObject) {
+            CCObjectExtension *cp = (CCObjectExtension*)(colorObject);
+            if (cp->getLocation() == gid) {
+                int colorID = cp->getID();
+                if (HelloWorld::isTileMatched(gid-1, colorID)) {
+                    CCLog("Combo exist at tile %i", gid-1);
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() - 1);
+                    HelloWorld::swapTilesMoving(sprite, toSwapSprite);
+                    HelloWorld::swapColorID(gid, gid-1);
+                }
+                else {
+                    CCLog("Combo doesn't exist");
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() - 1);
+                    HelloWorld::swapTilesReturn(sprite, toSwapSprite);
+                }
+            }
+        }
     }
 }
 
@@ -199,19 +204,25 @@ void HelloWorld::swipedUp(CCSprite *sprite) {
     CCPoint translatePosition = HelloWorld::tileCoorForPosition(spritePosition);
     unsigned int gid = layer->tileGIDAt(translatePosition);
     if (gid >= 7) {
-        CCPoint destination = ccp(spritePosition.x, spritePosition.y + map->getTileSize().height);
-        sprite->runAction(CCMoveTo::create(0.3, destination));
-        int thisSpriteTag = sprite->getTag();
-        
-        CCLog("This sprite tag : %i", thisSpriteTag);
-        
-        swapSprite = (CCSprite*)this->getChildByTag(thisSpriteTag -7);
-        swapSprite->runAction(CCMoveTo::create(0.3, sprite->getPosition()));
-        HelloWorld::swapTiles(thisSpriteTag, thisSpriteTag-7);
-        
-        sprite->setTag(thisSpriteTag-7);
-        swapSprite->setTag(thisSpriteTag);
-        HelloWorld::checkTiles();
+        CCObject *colorObject;
+        CCARRAY_FOREACH(colorArray, colorObject) {
+            CCObjectExtension *cp = (CCObjectExtension*)(colorObject);
+            if (cp->getLocation() == gid) {
+                int colorID = cp->getID();
+                if (HelloWorld::isTileMatched(gid-7, colorID)) {
+                    CCLog("Combo exist at tile %i", gid-7);
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() - 7);
+                    HelloWorld::swapTilesMoving(sprite, toSwapSprite);
+                    HelloWorld::swapColorID(gid, gid-7);
+                }
+                else {
+                    CCLog("Combo doesn't exist");
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() - 7);
+                    HelloWorld::swapTilesReturn(sprite, toSwapSprite);
+                }
+            }
+        }
+
     }
 }
 
@@ -220,20 +231,44 @@ void HelloWorld::swipedDown(CCSprite *sprite) {
     CCPoint translatePosition = HelloWorld::tileCoorForPosition(spritePosition);
     unsigned int gid = layer->tileGIDAt(translatePosition);
     if (gid < 43) {
-        CCPoint destination = ccp(spritePosition.x, spritePosition.y - map->getTileSize().height);
-        sprite->runAction(CCMoveTo::create(0.3, destination));
-        int thisSpriteTag = sprite->getTag();
-        
-        CCLog("This sprite tag : %i", thisSpriteTag);
-        
-        swapSprite = (CCSprite*)this->getChildByTag(thisSpriteTag +7);
-        swapSprite->runAction(CCMoveTo::create(0.3, sprite->getPosition()));
-        HelloWorld::swapTiles(thisSpriteTag, thisSpriteTag+7);
-        
-        sprite->setTag(thisSpriteTag+7);
-        swapSprite->setTag(thisSpriteTag);
-        HelloWorld::checkTiles();
+        CCObject *colorObject;
+        CCARRAY_FOREACH(colorArray, colorObject) {
+            CCObjectExtension *cp = (CCObjectExtension*)(colorObject);
+            if (cp->getLocation() == gid) {
+                int colorID = cp->getID();
+                if (HelloWorld::isTileMatched(gid+7, colorID)) {
+                    CCLog("Combo exist at tile %i", gid+7);
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() + 7);
+                    HelloWorld::swapTilesMoving(sprite, toSwapSprite);
+                    HelloWorld::swapColorID(gid, gid+7);
+                }
+                else {
+                    CCLog("Combo doesn't exist");
+                    CCSprite *toSwapSprite = (CCSprite*)this->getChildByTag(sprite->getTag() + 7);
+                    HelloWorld::swapTilesReturn(sprite, toSwapSprite);
+                }
+            }
+        }
+
     }
+}
+
+#pragma mark Tile Interactions
+
+void HelloWorld::swapTilesMoving(CCSprite *sprite, CCSprite *swapSprite) {
+    sprite->runAction(CCMoveTo::create(0.3, swapSprite->getPosition()));
+    swapSprite->runAction(CCMoveTo::create(0.3, sprite->getPosition()));
+    
+    int thisSpriteTag = sprite->getTag();
+    sprite->setTag(thisSpriteTag+1);
+    swapSprite->setTag(thisSpriteTag);
+}
+
+void HelloWorld::swapTilesReturn(CCSprite *sprite, CCSprite *swapSprite) {
+    sprite->runAction(CCSequence::create(CCMoveTo::create(0.3, swapSprite->getPosition()),
+                                         CCMoveTo::create(0.3, sprite->getPosition())));
+    swapSprite->runAction(CCSequence::create(CCMoveTo::create(0.3, sprite->getPosition()),
+                                             CCMoveTo::create(0.3, swapSprite->getPosition())));
 }
 
 #pragma mark Tile Functions
@@ -242,7 +277,7 @@ void HelloWorld::addTileMap () {
     map = CCTMXTiledMap::create("AnotherMap.tmx");
     this->addChild(map, -1, -1);
     layer = map->layerNamed("Grids");
-    HelloWorld::createFixture(layer);
+    HelloWorld::createFixture();
     
     CCArray *pChildrenArray = map->getChildren();
     CCObject *pObject = NULL;
@@ -254,8 +289,9 @@ void HelloWorld::addTileMap () {
     }
 }
 
-void HelloWorld::createFixture(CCTMXLayer* layer) {
+void HelloWorld::createFixture() {
     CCSize layerSize = layer->getLayerSize();
+    
     for (int y = 0; y < layerSize.height; y++) {
         for (int x = 0; x < layerSize.width; x++) {
             tileSprite = layer->tileAt(ccp(x, y));
@@ -279,20 +315,25 @@ void HelloWorld::createFixture(CCTMXLayer* layer) {
             strcpy(tileName[4], "Candy5");
             strcpy(tileName[5], "Candy6");
             strcpy(tileName[6], "Candy7");
-            int randomTile = rand() %7;
+            int randomTile = rand() % 7;
             char spriteName[100];
+            
+            while (HelloWorld::isTileMatched(m_gid, randomTile)) {
+                randomTile = rand() % 7;
+            }
+            
             sprintf(spriteName, "%s.png", tileName[randomTile]);
             CCSprite *randomTileSprite = CCSprite::create(spriteName);
             randomTileSprite->setPosition(ccp(tileSprite->getPositionX() + tileSprite->getContentSize().width/2,
                                               tileSprite->getPositionY() + tileSprite->getContentSize().height/2));
+            
+            CCObjectExtension *cp =new CCObjectExtension(randomTile, m_gid);
+            colorArray->addObject(cp);
+            
             int mgidTag = (300 + m_gid);
             this->addChild(randomTileSprite, 3, mgidTag);
+            
             spriteArray->addObject(randomTileSprite);
-            
-            tileDimentionArray[m_gid] = randomTile;
-            
-            Component *cp =new Component(randomTile,mgidTag);
-            component->addObject(cp);
         }
     }
 }
@@ -334,20 +375,96 @@ CCPoint HelloWorld::positionForTileCoor(CCPoint tileCoor) {
     return ccp(x, y);
 }
 
-CCSprite *HelloWorld::getRightTileByTag(int tag) {
-    return NULL;
-}
-
-void HelloWorld::swapTiles(int spriteTag, int swapSpriteTag) {
-
+void HelloWorld::swapColorID(int baseTileID, int swapTileID) {
+    int baseColor;
+    int swapColor;
+    
+    CCObject *colorObject;
+    CCARRAY_FOREACH(colorArray, colorObject) {
+        CCObjectExtension *ex = dynamic_cast<CCObjectExtension*>(colorObject);
+        if (ex->getLocation() == baseTileID) {
+            baseColor = ex->getID();
+            
+            CCObject *swapObject;
+            CCARRAY_FOREACH(colorArray, swapObject) {
+                CCObjectExtension *expSwap = dynamic_cast<CCObjectExtension*>(swapObject);
+                if (expSwap->getLocation() == swapTileID) {
+                    swapColor = expSwap->getID();
+                    ex->setID(swapColor);
+                    expSwap->setID(baseColor);
+                    CCLog("Tile %i's color %i got swaped with tile %i's color %i.", baseTileID, baseColor + 1, swapTileID, swapColor + 1);
+                }
+            }
+        }
+    }
 }
 
 void HelloWorld::checkTiles() {
     
 }
 
-void HelloWorld::checkTileCombo(CCSprite *sprite) {
+bool HelloWorld::isTileMatched(int tileID, int colorID) {
+    int leftTile = tileID -1, rightTile = tileID +1, topTile = tileID - 7, bottomTile = tileID +7;
+    CCObject *tileObject;
     
+    CCARRAY_FOREACH(colorArray, tileObject) {
+        CCObjectExtension *cp = (CCObjectExtension*)(tileObject);
+        if (tileID != 1 && tileID != 2 && tileID != 8 && tileID != 9 && tileID != 15 && tileID != 16 && tileID != 22 && tileID != 23 &&
+            tileID != 29 && tileID != 30 && tileID != 36 && tileID != 37 && tileID != 43 &&tileID != 44 ) {
+            if (cp->getLocation() == leftTile && cp->getID() == colorID) {
+                int thisLeftTile = cp->getLocation() -1;
+                CCObject *thisObject;
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getLocation() == thisLeftTile && thisCp->getID() == colorID) {
+                        CCLog("Left combo possiblity detected with tiles: %i, %i and %i.", tileID, thisLeftTile + 1, thisLeftTile);
+                        return true; continue;
+                    }
+                }
+            }
+        }
+        if (tileID != 6 && tileID != 7 && tileID != 13 && tileID != 14 && tileID != 20 && tileID != 21 && tileID != 27 && tileID != 28 &&
+            tileID != 34 && tileID != 35 && tileID != 41 && tileID != 42 && tileID != 48 && tileID != 49 ) {
+            if (cp->getLocation() == rightTile && cp->getID() == colorID) {
+                int thisRightTile = cp->getLocation() +1;
+                CCObject *thisObject;
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getLocation() == thisRightTile && thisCp->getID() == colorID) {
+                        CCLog("Right combo possiblity detected with tiles: %i, %i and %i.", tileID, thisRightTile + 1, thisRightTile);
+                        return true; continue;
+                    }
+                }
+            }
+        }
+        if (tileID >= 15) {
+            if (cp->getLocation() == topTile && cp->getID() == colorID) {
+                int thisTopTile = cp->getLocation() - 7;
+                CCObject *thisObject;
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getLocation() == thisTopTile && thisCp->getID() == colorID) {
+                        CCLog("Top combo possiblity detected with tiles: %i, %i and %i.", tileID, thisTopTile + 7, thisTopTile);
+                        return true; continue;
+                    }
+                }
+            }
+        }
+        if (tileID <= 35) {
+            if (cp->getLocation() == bottomTile && cp->getID() == colorID) {
+                int thisBottomTile = cp->getLocation() + 7;
+                CCObject *thisObject;
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getLocation() == thisBottomTile && thisCp->getID() == colorID) {
+                        CCLog("Bottom combo possiblity detected with tiles: %i, %i and %i.", tileID, thisBottomTile - 7, thisBottomTile);
+                        return true; continue;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }
 
 #pragma mark Swipe Navigation
@@ -376,7 +493,6 @@ void HelloWorld::setSwipeNavigation() {
     swipeDownSprite->setOpacity(0);
     swipeDownSprite->setTag(203);
     this->addChild(swipeDownSprite);
-    
 }
 
 void HelloWorld::removeSwipeNavigation() {

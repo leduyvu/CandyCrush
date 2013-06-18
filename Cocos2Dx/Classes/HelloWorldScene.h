@@ -23,7 +23,8 @@ private:
     
     CCArray *spriteArray;
     CCArray *tileArray;
-    CCArray *component;
+    CCArray *colorArray;
+    CCArray *toDestroyArray;
     
     CCTMXTiledMap *map;
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
@@ -44,6 +45,8 @@ private:
     bool swipeDownAllowed;
     bool swipeRightAllowed;
     
+    bool isStartTileMatching;
+    
     int tileDimentionArray[49];
     const char *plistPath = "TileData.plist";
 public:
@@ -53,21 +56,23 @@ public:
     void addTileMap();
     
     void menuCloseCallback(CCObject* pSender);
-    void createFixture(CCTMXLayer *layer);
+    void createFixture();
+    void removeFixture();
     void letThereBeACandy(CCTMXLayer *layer);
     
     bool touchPosValidation(CCPoint touchLoc);
+    bool isTileMatched(int tileID, int colorID);
     
     CCPoint tileCoorForPosition(CCPoint position);
     CCPoint positionForTileCoor(CCPoint tileCoor);
     
-    CCSprite *getRightTileByTag(int tag);
-    
     void setSwipeNavigation();
     void removeSwipeNavigation();
     void checkTiles();
-    void checkTileCombo(CCSprite *sprite);
-    void swapTiles(int spriteTag, int swapTag);
+    
+    void swapTilesMoving(CCSprite *sprite, CCSprite *swapSprite);
+    void swapTilesReturn(CCSprite *sprite, CCSprite *swapSprite);
+    void swapColorID(int spriteTag, int swapTag);
     
     void swipedUp(CCSprite *sprite);
     void swipedDown(CCSprite *sprite);
