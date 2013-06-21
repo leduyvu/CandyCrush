@@ -1,26 +1,32 @@
-//
-//  Component.h
-//  Cocos2Dx
-//
-//  Created by macbook_006 on 13/06/17.
-//
-//
-
 #ifndef Cocos2Dx_CCObjectExtension_h
 #define Cocos2Dx_CCObjectExtension_h
 #include "cocos2d.h"
 using namespace std;
 USING_NS_CC;
-class CCObjectExtension : public cocos2d::CCObject{
+class CCObjectExtension : public CCObject{
 private:
-    int location;
+    int gid;
     int colorId;
+    CCSprite *blockSprite;
+    CCPoint position;
+    CCPoint coordination;
 public:
-    CCObjectExtension(int colorId ,int location);
-    void setLocation(int c);
-    void setID(int colorId);
-    void setImage(string str);
-    int getLocation();
+    CCObjectExtension(int colorId ,int location, CCSprite *sprite, CCPoint position, CCPoint coordination);
+    
+    void setGid(int c);
+    int getGid();
+    
     int getID();
+    void setID(int colorId);
+
+    CCSprite *getSprite();
+    void setSprite(CCSprite *sprite);
+    
+    CCPoint getPosition();
+    void setPosition(CCPoint position);
+
+    CCPoint getCoordination();
+    void setCoordination(CCPoint position);
+
  };
 #endif

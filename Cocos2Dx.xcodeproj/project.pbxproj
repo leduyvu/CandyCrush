@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840434F61772AA6200E31B82 /* ShowGridButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 840434F51772AA6100E31B82 /* ShowGridButton.png */; };
+		840434FC1772DFB700E31B82 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 840434F71772DFB700E31B82 /* Background.png */; };
+		840434FD1772DFB700E31B82 /* HideColorButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 840434F81772DFB700E31B82 /* HideColorButton.png */; };
+		840434FE1772DFB700E31B82 /* HideGridButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 840434F91772DFB700E31B82 /* HideGridButton.png */; };
+		840434FF1772DFB700E31B82 /* PuzzleBackgroud2.png in Resources */ = {isa = PBXBuildFile; fileRef = 840434FA1772DFB700E31B82 /* PuzzleBackgroud2.png */; };
+		840435001772DFB700E31B82 /* ShowColorButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 840434FB1772DFB700E31B82 /* ShowColorButton.png */; };
+		840435021772E03700E31B82 /* PuzzleBackgroud3.png in Resources */ = {isa = PBXBuildFile; fileRef = 840435011772E03700E31B82 /* PuzzleBackgroud3.png */; };
+		840435051772E7F300E31B82 /* ClearButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 840435031772E7F300E31B82 /* ClearButton.png */; };
+		840435061772E7F300E31B82 /* RefreshButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 840435041772E7F300E31B82 /* RefreshButton.png */; };
 		8434C471176AD40100C8E722 /* Candy2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46E176AD40100C8E722 /* Candy2.png */; };
 		8434C472176AD40100C8E722 /* Candy3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C46F176AD40100C8E722 /* Candy3.png */; };
 		8434C473176AD40100C8E722 /* Candy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 8434C470176AD40100C8E722 /* Candy4.png */; };
@@ -287,12 +296,21 @@
 		DC12FED31744D22E00480D31 /* cpSweep1D.c in Sources */ = {isa = PBXBuildFile; fileRef = DC12FED21744D22E00480D31 /* cpSweep1D.c */; };
 		DC12FED51744D22E00480D31 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = DC12FED41744D22E00480D31 /* cpVect.c */; };
 		DC12FEDC1744D22E00480D31 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC12FEDB1744D22E00480D31 /* AppDelegate.cpp */; };
-		DC12FEDF1744D22E00480D31 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC12FEDE1744D22E00480D31 /* HelloWorldScene.cpp */; };
+		DC12FEDF1744D22E00480D31 /* TakasuPoppo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC12FEDE1744D22E00480D31 /* TakasuPoppo.cpp */; };
 		DC12FEE71744D31F00480D31 /* CCDataVisitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC12FEE61744D31F00480D31 /* CCDataVisitor.cpp */; };
 		DC12FEE91744D3A300480D31 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC12FEE81744D3A300480D31 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		840434F51772AA6100E31B82 /* ShowGridButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShowGridButton.png; sourceTree = "<group>"; };
+		840434F71772DFB700E31B82 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		840434F81772DFB700E31B82 /* HideColorButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HideColorButton.png; sourceTree = "<group>"; };
+		840434F91772DFB700E31B82 /* HideGridButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HideGridButton.png; sourceTree = "<group>"; };
+		840434FA1772DFB700E31B82 /* PuzzleBackgroud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PuzzleBackgroud2.png; sourceTree = "<group>"; };
+		840434FB1772DFB700E31B82 /* ShowColorButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShowColorButton.png; sourceTree = "<group>"; };
+		840435011772E03700E31B82 /* PuzzleBackgroud3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PuzzleBackgroud3.png; sourceTree = "<group>"; };
+		840435031772E7F300E31B82 /* ClearButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClearButton.png; sourceTree = "<group>"; };
+		840435041772E7F300E31B82 /* RefreshButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RefreshButton.png; sourceTree = "<group>"; };
 		8434C46E176AD40100C8E722 /* Candy2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy2.png; sourceTree = "<group>"; };
 		8434C46F176AD40100C8E722 /* Candy3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy3.png; sourceTree = "<group>"; };
 		8434C470176AD40100C8E722 /* Candy4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Candy4.png; sourceTree = "<group>"; };
@@ -879,8 +897,8 @@
 		DC12FED81744D22E00480D31 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		DC12FEDA1744D22E00480D31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		DC12FEDB1744D22E00480D31 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
-		DC12FEDD1744D22E00480D31 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
-		DC12FEDE1744D22E00480D31 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
+		DC12FEDD1744D22E00480D31 /* TakasuPoppo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TakasuPoppo.h; path = Classes/TakasuPoppo.h; sourceTree = "<group>"; };
+		DC12FEDE1744D22E00480D31 /* TakasuPoppo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TakasuPoppo.cpp; path = Classes/TakasuPoppo.cpp; sourceTree = "<group>"; };
 		DC12FEE51744D30B00480D31 /* CCDataVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDataVisitor.h; sourceTree = "<group>"; };
 		DC12FEE61744D31F00480D31 /* CCDataVisitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCDataVisitor.cpp; sourceTree = "<group>"; };
 		DC12FEE81744D3A300480D31 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -936,6 +954,15 @@
 		849666A51765C51A00621605 /* Crusher */ = {
 			isa = PBXGroup;
 			children = (
+				840435031772E7F300E31B82 /* ClearButton.png */,
+				840435041772E7F300E31B82 /* RefreshButton.png */,
+				840435011772E03700E31B82 /* PuzzleBackgroud3.png */,
+				840434F71772DFB700E31B82 /* Background.png */,
+				840434F81772DFB700E31B82 /* HideColorButton.png */,
+				840434F91772DFB700E31B82 /* HideGridButton.png */,
+				840434FA1772DFB700E31B82 /* PuzzleBackgroud2.png */,
+				840434FB1772DFB700E31B82 /* ShowColorButton.png */,
+				840434F51772AA6100E31B82 /* ShowGridButton.png */,
 				8434C478176EB5EE00C8E722 /* Candy5.png */,
 				8434C479176EB5EE00C8E722 /* Candy6.png */,
 				8434C47A176EB5EE00C8E722 /* Candy7.png */,
@@ -2082,8 +2109,8 @@
 				84658C37176F1B4000F518A6 /* CCObjectExtension.h */,
 				DC12FEDA1744D22E00480D31 /* AppDelegate.h */,
 				DC12FEDB1744D22E00480D31 /* AppDelegate.cpp */,
-				DC12FEDD1744D22E00480D31 /* HelloWorldScene.h */,
-				DC12FEDE1744D22E00480D31 /* HelloWorldScene.cpp */,
+				DC12FEDD1744D22E00480D31 /* TakasuPoppo.h */,
+				DC12FEDE1744D22E00480D31 /* TakasuPoppo.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2173,6 +2200,15 @@
 				8434C47B176EB5EE00C8E722 /* Candy5.png in Resources */,
 				8434C47C176EB5EE00C8E722 /* Candy6.png in Resources */,
 				8434C47D176EB5EE00C8E722 /* Candy7.png in Resources */,
+				840434F61772AA6200E31B82 /* ShowGridButton.png in Resources */,
+				840434FC1772DFB700E31B82 /* Background.png in Resources */,
+				840434FD1772DFB700E31B82 /* HideColorButton.png in Resources */,
+				840434FE1772DFB700E31B82 /* HideGridButton.png in Resources */,
+				840434FF1772DFB700E31B82 /* PuzzleBackgroud2.png in Resources */,
+				840435001772DFB700E31B82 /* ShowColorButton.png in Resources */,
+				840435021772E03700E31B82 /* PuzzleBackgroud3.png in Resources */,
+				840435051772E7F300E31B82 /* ClearButton.png in Resources */,
+				840435061772E7F300E31B82 /* RefreshButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2418,7 +2454,7 @@
 				DC12FED31744D22E00480D31 /* cpSweep1D.c in Sources */,
 				DC12FED51744D22E00480D31 /* cpVect.c in Sources */,
 				DC12FEDC1744D22E00480D31 /* AppDelegate.cpp in Sources */,
-				DC12FEDF1744D22E00480D31 /* HelloWorldScene.cpp in Sources */,
+				DC12FEDF1744D22E00480D31 /* TakasuPoppo.cpp in Sources */,
 				DC12FEE71744D31F00480D31 /* CCDataVisitor.cpp in Sources */,
 				84658C38176F1B4000F518A6 /* CCObjectExtension.cpp in Sources */,
 			);
