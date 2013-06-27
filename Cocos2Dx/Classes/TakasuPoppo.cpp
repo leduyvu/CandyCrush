@@ -283,7 +283,6 @@ void TakasuPoppo::swapColorID(CCObjectExtension *exObj, CCObjectExtension *swpOb
     swpObj->setSprite(exSprite);
     CCLog("Tile %i's color %i got swaped with tile %i's color %i.",
           exObj->getGid(), exObj->getID(), swpObj->getGid(), swpObj->getID());
-    if (gridOn)TakasuPoppo::refresh();
 }
 
 #pragma mark Tile Interactions
@@ -313,6 +312,7 @@ void TakasuPoppo::swapTilesMoving(CCObjectExtension *exObj, CCObjectExtension *s
     swpSprite->runAction(CCMoveTo::create(0.1, exObj->getPosition()));
     
     TakasuPoppo::swapColorID(exObj, swpObj);
+    if (gridOn)TakasuPoppo::refresh();
 }
 
 void TakasuPoppo::swapTilesReturn(CCObjectExtension *exObj, CCObjectExtension *swpObj) {
@@ -388,62 +388,63 @@ bool TakasuPoppo::isTileMatched(int gid, int typeID) {
 
 bool TakasuPoppo::isBlockMatched(int gid, int typeID) {
     CCLog("GID %i & Color %i", gid, typeID);
-    if (gid != 1 && gid != 2 &&
-        gid != 8 && gid != 9 &&
-        gid != 15 && gid != 16 &&
-        gid != 22 && gid != 23 &&
-        gid != 29 && gid != 30 &&
-        gid != 36 && gid != 37 &&
-        gid != 43 && gid != 44 ) {
-        if (gid != 6 && gid != 13 && gid != 20 && gid != 27 && gid != 34 && gid != 41 && gid != 48) {
-            if (TakasuPoppo::isRightQuadMatch(gid, typeID)) {
-                CCLog("Right Quad");
-                return true;
-            }
-        }
-        else if (TakasuPoppo::isRightTriMatch(gid, typeID)) {
-            CCLog("Right Tri");
+    
+    if (gid != 1 && gid != 2 && gid != 6 && gid !=7 &&
+        gid != 8 && gid != 9 && gid != 13 &&  gid !=14 &&
+        gid != 15 && gid != 16 && gid != 20 && gid !=21 &&
+        gid != 22 && gid != 23 && gid != 27 && gid !=28 &&
+        gid != 29 && gid != 30 && gid != 34 &&  gid !=35 &&
+        gid != 36 && gid != 37 && gid != 41 && gid !=42 &&
+        gid != 43 && gid != 44 && gid != 48 && gid !=49) {
+        if (TakasuPoppo::isPentaHorMatch(gid, typeID)) {
+            CCLog("Penta Hor");
             return true;
         }
     }
     
-    if (gid != 6 && gid != 7 &&
-        gid != 13 && gid != 14 &&
-        gid != 20 && gid != 21 &&
-        gid != 27 && gid != 28 &&
-        gid != 34 && gid != 35 &&
-        gid != 41 && gid != 42 &&
-        gid != 48 && gid != 49 ) {
-        if (gid != 2 && gid != 9 && gid != 16 && gid != 23 && gid != 30 && gid != 37 && gid != 44) {
-            if (TakasuPoppo::isLeftQuadMatch(gid, typeID)) {
-                CCLog("Left Quad");
-                return true;
-            }
-        }
-        else if (TakasuPoppo::isLeftTriMatch(gid, typeID)) {
-            CCLog("Left Tri");
+    if (gid >= 15 && gid <= 35) {
+        if (TakasuPoppo::isPentaVerMatch(gid, typeID)) {
+            CCLog("Penta Ver");
             return true;
         }
     }
     
-    if (gid >= 15) {
+    if (gid != 1 && gid != 2 && gid != 7 &&
+        gid != 8 && gid != 9 && gid != 14 &&
+        gid != 15 && gid != 16 && gid != 21 &&
+        gid != 22 && gid != 23 && gid != 28 &&
+        gid != 29 && gid != 30 && gid != 35 &&
+        gid != 36 && gid != 37 && gid != 42 &&
+        gid != 43 && gid != 44 && gid != 49) {
+        if (TakasuPoppo::isLeftQuadMatch(gid, typeID)) {
+            CCLog("Left Quad");
+            return true;
+        }
+    }
+    
+    if (gid != 1 && gid != 6 && gid != 7 && 
+        gid != 8 && gid != 13 && gid != 14 && 
+        gid != 15 && gid != 20 && gid != 21 && 
+        gid != 22 && gid != 27 && gid != 28 &&
+        gid != 29 && gid != 34 && gid != 35 &&
+        gid != 36 && gid != 41 && gid != 42 &&
+        gid != 43 && gid != 48 && gid != 48) {
+        if (TakasuPoppo::isRightQuadMatch(gid, typeID)) {
+            CCLog("Right Quad");
+            return true;
+        }
+    }
+    
+    if (gid >= 15 && gid <= 42) {
         if (TakasuPoppo::isUpQuadMatch(gid, typeID)) {
             CCLog("Top Quad");
             return true;
         }
-        else if (TakasuPoppo::isTopTriMatch(gid, typeID)) {
-            CCLog("Top Tri");
-            return true;
-        }
     }
     
-    if (gid <= 35) {
+    if (gid >= 8 && gid <= 35) {
         if (TakasuPoppo::isDownQuadMatch(gid, typeID)) {
             CCLog("Bottom Quad");
-           return true; 
-        }
-        else if (TakasuPoppo::isBottomTriMatch(gid, typeID)) {
-            CCLog("Bottom Tri");
             return true;
         }
     }
@@ -455,37 +456,58 @@ bool TakasuPoppo::isBlockMatched(int gid, int typeID) {
         gid != 29 &&  gid !=35 &&
         gid != 36 &&  gid !=42 &&
         gid != 43 &&  gid !=49) {
-        if (gid != 2 && gid != 6 &&
-            gid != 9 && gid != 13 &&
-            gid != 16 && gid != 20 &&
-            gid != 23 && gid != 27 &&
-            gid != 30 && gid != 34 &&
-            gid != 37 && gid != 41 &&
-            gid != 44 && gid != 48) {
-            if (TakasuPoppo::isPentaHorMatch(gid, typeID)) {
-                CCLog("Penta Hor");
-                return true;
-            }
-        }
-        else if (TakasuPoppo::isMidHorMatch(gid, typeID)) {
+        if (TakasuPoppo::isMidHorMatch(gid, typeID)) {
             CCLog("Mid Hor");
             return true;
         }
     }
     
     if (gid >= 8 && gid <= 42) {
-        if (gid >= 15 && gid <= 35) {
-            if (TakasuPoppo::isPentaVerMatch(gid, typeID)) {
-                CCLog("Penta Ver");
-                return true;
-            }
-        }
-        else if (TakasuPoppo::isMidVerMatch(gid, typeID)) {
+        if (TakasuPoppo::isMidVerMatch(gid, typeID)) {
             CCLog("Mid Ver");
             return true;
         }
     }
     
+    if (gid != 1 && gid != 2 &&
+        gid != 8 && gid != 9 &&
+        gid != 15 && gid != 16 &&
+        gid != 22 && gid != 23 &&
+        gid != 29 && gid != 30 &&
+        gid != 36 && gid != 37 &&
+        gid != 43 && gid != 44 ) {
+        if (TakasuPoppo::isLeftTriMatch(gid, typeID)) {
+            CCLog("Left Tri");
+            return true;
+        }
+    }
+    
+    if (gid != 6 && gid != 7 &&
+        gid != 13 && gid != 14 &&
+        gid != 20 && gid != 21 &&
+        gid != 27 && gid != 28 &&
+        gid != 34 && gid != 35 &&
+        gid != 41 && gid != 42 &&
+        gid != 48 && gid != 49 ) {
+        if (TakasuPoppo::isRightTriMatch(gid, typeID)) {
+            CCLog("Right Tri");
+            return true;
+        }
+    }
+    
+    if (gid >= 15) {
+        if (TakasuPoppo::isTopTriMatch(gid, typeID)) {
+            CCLog("Top Tri");
+            return true;
+        }
+    }
+    
+    if (gid <= 35) {
+        if (TakasuPoppo::isBottomTriMatch(gid, typeID)) {
+            CCLog("Bottom Tri");
+            return true;
+        }
+    }
     return false;
 }
 
