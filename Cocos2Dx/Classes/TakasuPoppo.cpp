@@ -547,7 +547,7 @@ bool TakasuPoppo::isBottomTriMatch(int gid, int typeID) {
     int gidToIndex = gid - 1;
     CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
     CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
-    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 14);
     CCObjectExtension *bottomBottomEx = dynamic_cast<CCObjectExtension*>(bottomBottomObject);
     if (bottomExObj->getID() == typeID && bottomBottomEx->getID() == typeID) return true;
     return false;
@@ -593,7 +593,7 @@ bool TakasuPoppo::isDownQuadMatch(int gid, int typeID) {
     int gidToIndex = gid - 1;
     CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
     CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
-    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 14);
     CCObjectExtension *bottomBottomEx = dynamic_cast<CCObjectExtension*>(bottomBottomObject);
     CCObject *topObject = colorArray->objectAtIndex(gidToIndex - 7);
     CCObjectExtension *topExObj = dynamic_cast<CCObjectExtension*>(topObject);
@@ -644,13 +644,12 @@ bool TakasuPoppo::isPentaVerMatch(int gid, int typeID) {
     CCObjectExtension *topTopEx = dynamic_cast<CCObjectExtension*>(topTopObj);
     CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
     CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
-    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 14);
     CCObjectExtension *bottomBottomEx = dynamic_cast<CCObjectExtension*>(bottomBottomObject);
     if (topExObj->getID() == typeID && topTopEx->getID() == typeID &&
         bottomExObj->getID() == typeID && bottomBottomEx->getID() == typeID) return true;
     return false;
 }
-
 #pragma mark Array
 
 void TakasuPoppo::addBlocksToArray() {
