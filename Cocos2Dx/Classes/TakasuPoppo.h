@@ -21,6 +21,7 @@ private:
     CCArray *colorArray;
     CCArray *toDestroyArray;
     CCArray *pickedArray;
+    
     CCArray *debugTilesArray;
     
     bool spriteContained;
@@ -48,6 +49,23 @@ public:
     
     bool touchPosValidation(CCPoint touchLoc);
     bool isTileMatched(int gid, int typeID);
+    bool isBlockMatched(int gid, int typeID);
+    
+    bool isRightTriMatch(int gid, int typeID);
+    bool isLeftTriMatch(int gid, int typeID);
+    bool isTopTriMatch(int gid, int typeID);
+    bool isBottomTriMatch(int gid, int typeID);
+    
+    bool isLeftQuadMatch(int gid, int typeID);
+    bool isRightQuadMatch(int gid, int typeID);
+    bool isUpQuadMatch(int gid, int typeID);
+    bool isDownQuadMatch(int gid, int typeID);
+    
+    bool isMidHorMatch(int gid, int typeID);
+    bool isMidVerMatch(int gid, int typeID);
+    
+    bool isPentaHorMatch(int gid, int typeID);
+    bool isPentaVerMatch(int gid, int typeID);
     
     CCPoint tileCoorForPosition(CCPoint position);
     
@@ -62,6 +80,12 @@ public:
     void swipedDown(CCObjectExtension *exObj);
     void swipedLeft(CCObjectExtension *exObj);
     void swipedRight(CCObjectExtension *exObj);
+    
+    void addBlocksToArray();
+    void setValuesForExObj(CCObjectExtension *exObj, int colorID, int gid, CCSprite *sprite, CCPoint position, CCPoint coordination);
+    void checkAndAddToRemove();
+    void removeObjectsFromDestroyArray();
+    void onRemoveMoveTiles(CCObjectExtension *exObj);
     
     void setupDebugButton();
     void switchGrid();

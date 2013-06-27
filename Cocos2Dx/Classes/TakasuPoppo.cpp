@@ -22,8 +22,10 @@ bool TakasuPoppo::init() {
     colorArray = new CCArray;
     toDestroyArray = new CCArray;
     pickedArray = new CCArray;
+    
     debugTilesArray = new CCArray;
     
+    TakasuPoppo::addBlocksToArray();
     TakasuPoppo::addTileMap();
     
     CCSprite *background = CCSprite::create("PuzzleBackgroud3.png");
@@ -82,12 +84,12 @@ void TakasuPoppo::update(float dt) {
 void TakasuPoppo::ccTouchesBegan(CCSet *touches, CCEvent *event) {
     CCTouch *touch = (CCTouch*)touches->anyObject();
     CCPoint touchLoc = this->getParent()->convertTouchToNodeSpace(touch);
-    CCObject *object = NULL;
-    CCARRAY_FOREACH(colorArray, object) {
+    
+    if (TakasuPoppo::touchPosValidation(touchLoc)) {
+        unsigned int gid = layer->tileGIDAt(TakasuPoppo::tileCoorForPosition(touchLoc));
+        CCObject *object = colorArray->objectAtIndex(gid - 1);
         CCObjectExtension *exObject = dynamic_cast<CCObjectExtension*>(object);
-        CCSprite *objectSprite = (CCSprite*)exObject->getSprite();
-        CCRect spriteRect = objectSprite->boundingBox();
-        if (spriteRect.containsPoint(touchLoc)) {
+        if (exObject->getSprite()) {
             swipeRecognized = false;
             startSwipePoint = touchLoc;
             pickedArray->addObject(exObject);
@@ -163,7 +165,8 @@ bool TakasuPoppo::touchPosValidation(CCPoint touchLoc) {
     if (touchLoc.x < 0 ||
         touchLoc.y < 0 ||
         touchLoc.x >= map->getContentSize().width ||
-        touchLoc.y >= map->getContentSize().height) return  false;
+        touchLoc.y >= map->getContentSize().height)
+        return false;
     else return true;
 }
 
@@ -247,15 +250,16 @@ void TakasuPoppo::createFixture() {
             CCPoint tilePosition = ccp(tileSprite->getPositionX() + tileSprite->getContentSize().width/2,
                                        tileSprite->getPositionY() + tileSprite->getContentSize().height/2);
             CCPoint tileCoordination = TakasuPoppo::tileCoorForPosition(tilePosition);
-            randomTileSprite->setPosition(tilePosition);
+            randomTileSprite->setPosition(ccp(tilePosition.x, tilePosition.y + 10));
             
-            CCObjectExtension *exObj =new CCObjectExtension(randomTile, m_gid, randomTileSprite, tilePosition, tileCoordination);
-            colorArray->addObject(exObj);
-            
-            CCLog("Tile %i added - Color:%i; GID:%i, TileSprite:%s, TilePosition: X%i Y%i, Tile Coordination; X%i Y%i.", colorArray->indexOfObject(exObj), randomTile, m_gid, spriteName, (int)tilePosition.x, (int)tilePosition.y, (int)tileCoordination.x, (int)tileCoordination.y);
-            
-            int mgidTag = (300 + m_gid);
-            this->addChild(randomTileSprite, 3, mgidTag);
+            CCObject *object = colorArray->objectAtIndex(m_gid - 1);
+            CCObjectExtension *exObj = dynamic_cast<CCObjectExtension*>(object);
+            TakasuPoppo::setValuesForExObj(exObj, randomTile, m_gid, randomTileSprite, tilePosition, tileCoordination);
+            CCLog("Tile %i added - Color:%i; GID:%i, TileSprite:%s, TilePosition: X%i Y%i, Tile Coordination; X%i Y%i.",
+                  colorArray->indexOfObject(exObj), randomTile, m_gid, spriteName, (int)tilePosition.x, (int)tilePosition.y,
+                  (int)tileCoordination.x, (int)tileCoordination.y);
+
+            this->addChild(randomTileSprite, 3, 300 + m_gid);
         }
     }
 }
@@ -277,88 +281,9 @@ void TakasuPoppo::swapColorID(CCObjectExtension *exObj, CCObjectExtension *swpOb
     swpObj->setID(exID);
     exObj->setSprite(swpSprite);
     swpObj->setSprite(exSprite);
-    CCLog("Tile %i's color %i got swaped with tile %i's color %i.", exObj->getGid(), exObj->getID(), swpObj->getGid(), swpObj->getID());
+    CCLog("Tile %i's color %i got swaped with tile %i's color %i.",
+          exObj->getGid(), exObj->getID(), swpObj->getGid(), swpObj->getID());
     if (gridOn)TakasuPoppo::refresh();
-}
-
-bool TakasuPoppo::isTileMatched(int gid, int typeID) {
-    int leftTile = gid -1, rightTile = gid +1, topTile = gid - 7, bottomTile = gid +7;
-    CCObject *tileObject;
-    CCARRAY_FOREACH(colorArray, tileObject) {
-        CCObjectExtension *cp = (CCObjectExtension*)(tileObject);
-        
-        if (gid != 1 && gid != 2 && gid != 8 && gid != 9 && gid != 15 && gid != 16 && gid != 22 && gid != 23 &&
-            gid != 29 && gid != 30 && gid != 36 && gid != 37 && gid != 43 &&gid != 44 ) {
-            if (cp->getGid() == leftTile && cp->getID() == typeID) {
-                int thisLeftTile = cp->getGid() -1;
-                CCObject *thisObject;
-                CCARRAY_FOREACH(colorArray, thisObject) {
-                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
-                    if (thisCp->getGid() == thisLeftTile && thisCp->getID() == typeID) {
-                        CCLog("Left combo possiblity detected with tiles: %i, %i and %i.", gid, thisLeftTile - 1, thisLeftTile);
-                        return true; continue;
-                    }
-                    else if (thisCp->getGid() == rightTile && thisCp->getID() == typeID) {
-                        CCLog("Left combo possiblity detected with tiles: %i, %i and %i.", thisLeftTile, gid, rightTile);
-                        return true; continue;
-                    }
-                }
-            }
-        }
-        if (gid != 6 && gid != 7 && gid != 13 && gid != 14 && gid != 20 && gid != 21 && gid != 27 && gid != 28 &&
-            gid != 34 && gid != 35 && gid != 41 && gid != 42 && gid != 48 && gid != 49 ) {
-            if (cp->getGid() == rightTile && cp->getID() == typeID) {
-                int thisRightTile = cp->getGid() +1;
-                CCObject *thisObject;
-                CCARRAY_FOREACH(colorArray, thisObject) {
-                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
-                    if (thisCp->getGid() == thisRightTile && thisCp->getID() == typeID) {
-                        CCLog("Right combo possiblity detected with tiles: %i, %i and %i.", gid, thisRightTile + 1, thisRightTile);
-                        return true; continue;
-                    }
-                    else if (thisCp->getGid() == leftTile && thisCp->getID() == typeID) {
-                        CCLog("Right combo possiblity detected with tiles: %i, %i and %i.", leftTile, gid, thisRightTile);
-                        return true; continue;
-                    }
-                }
-            }
-        }
-        if (gid >= 15) {
-            if (cp->getGid()  == topTile && cp->getID() == typeID) {
-                int thisTopTile = cp->getGid()  - 7;
-                CCObject *thisObject;
-                CCARRAY_FOREACH(colorArray, thisObject) {
-                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
-                    if (thisCp->getGid()  == thisTopTile && thisCp->getID() == typeID) {
-                        CCLog("Top combo possiblity detected with tiles: %i, %i and %i.", gid, thisTopTile + 7, thisTopTile);
-                        return true; continue;
-                    }
-                    else if (thisCp->getGid() == bottomTile && thisCp->getID() == typeID) {
-                        CCLog("Top combo possiblity detected with tiles: %i, %i and %i.", thisTopTile, gid, bottomTile);
-                        return true; continue;
-                    }
-                }
-            }
-        }
-        if (gid <= 35) {
-            if (cp->getGid()  == bottomTile && cp->getID() == typeID) {
-                int thisBottomTile = cp->getGid()  + 7;
-                CCObject *thisObject;
-                CCARRAY_FOREACH(colorArray, thisObject) {
-                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
-                    if (thisCp->getGid() == thisBottomTile && thisCp->getID() == typeID) {
-                        CCLog("Bottom combo possiblity detected with tiles: %i, %i and %i.", gid, thisBottomTile - 7, thisBottomTile);
-                        return true; continue;
-                    }
-                    else if (thisCp->getGid() == topTile && thisCp->getID() == typeID) {
-                        CCLog("Bottom combo possiblity detected with tiles: %i, %i and %i.", topTile, gid, thisBottomTile);
-                        return true; continue;
-                    }
-                }
-            }
-        }
-    }
-    return false;
 }
 
 #pragma mark Tile Interactions
@@ -366,14 +291,12 @@ void TakasuPoppo::swapTilesCheck(CCObjectExtension *exObj, int swpGid) {
     CCObject *object;
     CCARRAY_FOREACH(colorArray, object) {
         CCObjectExtension *objectExtension = dynamic_cast<CCObjectExtension*>(object);
-        if (objectExtension->getGid() == swpGid) {
+        if (objectExtension->getGid() == swpGid && exObj && objectExtension) {
             TakasuPoppo::swapColorID(exObj, objectExtension);
-            
-            if (TakasuPoppo::isTileMatched(exObj->getGid(), exObj->getID()) ||
-                TakasuPoppo::isTileMatched(objectExtension->getGid(), objectExtension->getID())){
+            if (TakasuPoppo::isBlockMatched(exObj->getGid(), exObj->getID()) ||
+                TakasuPoppo::isBlockMatched(objectExtension->getGid(), objectExtension->getID())) {
                 TakasuPoppo::swapColorID(exObj, objectExtension);
                 TakasuPoppo::swapTilesMoving(exObj, objectExtension);
-                
             }
             else {
                 TakasuPoppo::swapColorID(exObj, objectExtension);
@@ -388,6 +311,7 @@ void TakasuPoppo::swapTilesMoving(CCObjectExtension *exObj, CCObjectExtension *s
     CCSprite *swpSprite = (CCSprite*)swpObj->getSprite();
     sprite->runAction(CCMoveTo::create(0.1, swpObj->getPosition()));
     swpSprite->runAction(CCMoveTo::create(0.1, exObj->getPosition()));
+    
     TakasuPoppo::swapColorID(exObj, swpObj);
 }
 
@@ -398,6 +322,363 @@ void TakasuPoppo::swapTilesReturn(CCObjectExtension *exObj, CCObjectExtension *s
                                          CCMoveTo::create(0.1, exObj->getPosition()), NULL));
     swpSprite->runAction(CCSequence::create(CCMoveTo::create(0.1, exObj->getPosition()),
                                             CCMoveTo::create(0.1, swpObj->getPosition()), NULL));
+}
+
+
+#pragma mark Matching Control
+
+bool TakasuPoppo::isTileMatched(int gid, int typeID) {
+    int leftTile = gid -1, leftLeftTile = gid - 2,
+    rightTile = gid +1, rightRightTile = gid + 2,
+    topTile = gid - 7, topTopTile = gid - 14,
+    bottomTile = gid +7, bottomBottomTile = gid + 14;
+    
+    CCObject *tileObject;
+    CCARRAY_FOREACH(colorArray, tileObject) {
+        CCObjectExtension *cp = (CCObjectExtension*)(tileObject);
+        CCObject *thisObject;
+        if (gid != 1 && gid != 2 &&
+            gid != 8 && gid != 9 &&
+            gid != 15 && gid != 16 &&
+            gid != 22 && gid != 23 &&
+            gid != 29 && gid != 30 &&
+            gid != 36 && gid != 37 &&
+            gid != 43 &&gid != 44 ) {
+            if (cp->getGid() == leftTile && cp->getID() == typeID) {
+                CCObject *thisObject = colorArray->objectAtIndex(leftLeftTile);
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getGid() == leftLeftTile && thisCp->getID() == typeID) return true; continue;
+                }
+            }
+        }
+        if (gid != 6 && gid != 7 &&
+            gid != 13 && gid != 14 &&
+            gid != 20 && gid != 21 &&
+            gid != 27 && gid != 28 &&
+            gid != 34 && gid != 35 &&
+            gid != 41 && gid != 42 &&
+            gid != 48 && gid != 49 ) {
+            if (cp->getGid() == rightTile && cp->getID() == typeID) {
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getGid() == rightRightTile && thisCp->getID() == typeID) return true; continue;
+                }
+            }
+        }
+        if (gid >= 15) {
+            if (cp->getGid()  == topTile && cp->getID() == typeID) {
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getGid()  == topTopTile && thisCp->getID() == typeID) return true; continue;
+                }
+            }
+        }
+        if (gid <= 35) {
+            if (cp->getGid()  == bottomTile && cp->getID() == typeID) {
+                CCARRAY_FOREACH(colorArray, thisObject) {
+                    CCObjectExtension *thisCp = (CCObjectExtension*)(thisObject);
+                    if (thisCp->getGid() == bottomBottomTile && thisCp->getID() == typeID) return true; continue;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool TakasuPoppo::isBlockMatched(int gid, int typeID) {
+    CCLog("GID %i & Color %i", gid, typeID);
+    if (gid != 1 && gid != 2 &&
+        gid != 8 && gid != 9 &&
+        gid != 15 && gid != 16 &&
+        gid != 22 && gid != 23 &&
+        gid != 29 && gid != 30 &&
+        gid != 36 && gid != 37 &&
+        gid != 43 && gid != 44 ) {
+        if (gid != 6 && gid != 13 && gid != 20 && gid != 27 && gid != 34 && gid != 41 && gid != 48) {
+            if (TakasuPoppo::isRightQuadMatch(gid, typeID)) {
+                CCLog("Right Quad");
+                return true;
+            }
+        }
+        else if (TakasuPoppo::isRightTriMatch(gid, typeID)) {
+            CCLog("Right Tri");
+            return true;
+        }
+    }
+    
+    if (gid != 6 && gid != 7 &&
+        gid != 13 && gid != 14 &&
+        gid != 20 && gid != 21 &&
+        gid != 27 && gid != 28 &&
+        gid != 34 && gid != 35 &&
+        gid != 41 && gid != 42 &&
+        gid != 48 && gid != 49 ) {
+        if (gid != 2 && gid != 9 && gid != 16 && gid != 23 && gid != 30 && gid != 37 && gid != 44) {
+            if (TakasuPoppo::isLeftQuadMatch(gid, typeID)) {
+                CCLog("Left Quad");
+                return true;
+            }
+        }
+        else if (TakasuPoppo::isLeftTriMatch(gid, typeID)) {
+            CCLog("Left Tri");
+            return true;
+        }
+    }
+    
+    if (gid >= 15) {
+        if (TakasuPoppo::isUpQuadMatch(gid, typeID)) {
+            CCLog("Top Quad");
+            return true;
+        }
+        else if (TakasuPoppo::isTopTriMatch(gid, typeID)) {
+            CCLog("Top Tri");
+            return true;
+        }
+    }
+    
+    if (gid <= 35) {
+        if (TakasuPoppo::isDownQuadMatch(gid, typeID)) {
+            CCLog("Bottom Quad");
+           return true; 
+        }
+        else if (TakasuPoppo::isBottomTriMatch(gid, typeID)) {
+            CCLog("Bottom Tri");
+            return true;
+        }
+    }
+    
+    if (gid != 1 &&  gid !=7 &&
+        gid != 8 &&  gid !=14 &&
+        gid != 15 &&  gid !=21 &&
+        gid != 22 &&  gid !=28 &&
+        gid != 29 &&  gid !=35 &&
+        gid != 36 &&  gid !=42 &&
+        gid != 43 &&  gid !=49) {
+        if (gid != 2 && gid != 6 &&
+            gid != 9 && gid != 13 &&
+            gid != 16 && gid != 20 &&
+            gid != 23 && gid != 27 &&
+            gid != 30 && gid != 34 &&
+            gid != 37 && gid != 41 &&
+            gid != 44 && gid != 48) {
+            if (TakasuPoppo::isPentaHorMatch(gid, typeID)) {
+                CCLog("Penta Hor");
+                return true;
+            }
+        }
+        else if (TakasuPoppo::isMidHorMatch(gid, typeID)) {
+            CCLog("Mid Hor");
+            return true;
+        }
+    }
+    
+    if (gid >= 8 && gid <= 42) {
+        if (gid >= 15 && gid <= 35) {
+            if (TakasuPoppo::isPentaVerMatch(gid, typeID)) {
+                CCLog("Penta Ver");
+                return true;
+            }
+        }
+        else if (TakasuPoppo::isMidVerMatch(gid, typeID)) {
+            CCLog("Mid Ver");
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool TakasuPoppo::isRightTriMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *rightObject = colorArray->objectAtIndex(gidToIndex + 1);
+    CCObjectExtension *rightExObj = dynamic_cast<CCObjectExtension*>(rightObject);
+    CCObject *rightRightObject = colorArray->objectAtIndex(gidToIndex + 2);
+    CCObjectExtension *rightRightEx = dynamic_cast<CCObjectExtension*>(rightRightObject);
+    if (rightExObj->getID() == typeID && rightRightEx->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isLeftTriMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *leftObject = colorArray->objectAtIndex(gidToIndex - 1);
+    CCObjectExtension *leftExObj = dynamic_cast<CCObjectExtension*>(leftObject);
+    CCObject *leftLeftObject = colorArray->objectAtIndex(gidToIndex - 2);
+    CCObjectExtension *leftLeftEx = dynamic_cast<CCObjectExtension*>(leftLeftObject);
+    CCLog("Left Object ID: %i ; Left Left Object ID: %i", leftExObj->getID(), leftLeftEx->getID());
+    CCLog("Left Object GID:%i ; Left Left Object GID:%i", leftExObj->getGid(), leftLeftEx->getGid());
+    if (leftExObj->getID() == typeID && leftLeftEx->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isTopTriMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *topObject = colorArray->objectAtIndex(gidToIndex - 7);
+    CCObjectExtension *topExObj = dynamic_cast<CCObjectExtension*>(topObject);
+    CCObject *topTopObj = colorArray->objectAtIndex(gidToIndex - 14);
+    CCObjectExtension *topTopEx = dynamic_cast<CCObjectExtension*>(topTopObj);
+    if (topExObj->getID() == typeID && topTopEx->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isBottomTriMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
+    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomBottomEx = dynamic_cast<CCObjectExtension*>(bottomBottomObject);
+    if (bottomExObj->getID() == typeID && bottomBottomEx->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isLeftQuadMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *leftObject = colorArray->objectAtIndex(gidToIndex - 1);
+    CCObjectExtension *leftExObj = dynamic_cast<CCObjectExtension*>(leftObject);
+    CCObject *leftLeftObject = colorArray->objectAtIndex(gidToIndex - 2);
+    CCObjectExtension *leftLeftEx = dynamic_cast<CCObjectExtension*>(leftLeftObject);
+    CCObject *rightObject = colorArray->objectAtIndex(gidToIndex + 1);
+    CCObjectExtension *rightExObj = dynamic_cast<CCObjectExtension*>(rightObject);
+    if (leftExObj->getID() == typeID && leftLeftEx->getID() == typeID && rightExObj->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isRightQuadMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *rightObject = colorArray->objectAtIndex(gidToIndex + 1);
+    CCObjectExtension *rightExObj = dynamic_cast<CCObjectExtension*>(rightObject);
+    CCObject *rightRightObject = colorArray->objectAtIndex(gidToIndex + 2);
+    CCObjectExtension *rightRightEx = dynamic_cast<CCObjectExtension*>(rightRightObject);
+    CCObject *leftObject = colorArray->objectAtIndex(gidToIndex - 1);
+    CCObjectExtension *leftExObj = dynamic_cast<CCObjectExtension*>(leftObject);
+    if (rightExObj->getID() == typeID && rightRightEx->getID() == typeID && leftExObj->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isUpQuadMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *topObject = colorArray->objectAtIndex(gidToIndex - 7);
+    CCObjectExtension *topExObj = dynamic_cast<CCObjectExtension*>(topObject);
+    CCObject *topTopObj = colorArray->objectAtIndex(gidToIndex - 14);
+    CCObjectExtension *topTopEx = dynamic_cast<CCObjectExtension*>(topTopObj);
+    CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
+    if (topExObj->getID() == typeID && topTopEx->getID() == typeID && bottomExObj->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isDownQuadMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
+    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomBottomEx = dynamic_cast<CCObjectExtension*>(bottomBottomObject);
+    CCObject *topObject = colorArray->objectAtIndex(gidToIndex - 7);
+    CCObjectExtension *topExObj = dynamic_cast<CCObjectExtension*>(topObject);
+    if (bottomExObj->getID() == typeID && bottomBottomEx->getID() == typeID && topExObj->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isMidHorMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *leftObject = colorArray->objectAtIndex(gidToIndex - 1);
+    CCObjectExtension *leftExObj = dynamic_cast<CCObjectExtension*>(leftObject);
+    CCObject *rightObject = colorArray->objectAtIndex(gidToIndex + 1);
+    CCObjectExtension *rightExObj = dynamic_cast<CCObjectExtension*>(rightObject);
+    if (leftExObj->getID() == typeID && rightExObj->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isMidVerMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *topObject = colorArray->objectAtIndex(gidToIndex - 7);
+    CCObjectExtension *topExObj = dynamic_cast<CCObjectExtension*>(topObject);
+    CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
+    if (topExObj->getID() == typeID && bottomExObj->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isPentaHorMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *rightObject = colorArray->objectAtIndex(gidToIndex + 1);
+    CCObjectExtension *rightExObj = dynamic_cast<CCObjectExtension*>(rightObject);
+    CCObject *rightRightObject = colorArray->objectAtIndex(gidToIndex + 2);
+    CCObjectExtension *rightRightEx = dynamic_cast<CCObjectExtension*>(rightRightObject);
+    CCObject *leftObject = colorArray->objectAtIndex(gidToIndex - 1);
+    CCObjectExtension *leftExObj = dynamic_cast<CCObjectExtension*>(leftObject);
+    CCObject *leftLeftObject = colorArray->objectAtIndex(gidToIndex - 2);
+    CCObjectExtension *leftLeftEx = dynamic_cast<CCObjectExtension*>(leftLeftObject);
+    if (leftExObj->getID() == typeID && leftLeftEx->getID() == typeID &&
+        rightExObj->getID() == typeID && rightRightEx->getID() == typeID) return true;
+    return false;
+}
+
+bool TakasuPoppo::isPentaVerMatch(int gid, int typeID) {
+    int gidToIndex = gid - 1;
+    CCObject *topObject = colorArray->objectAtIndex(gidToIndex - 7);
+    CCObjectExtension *topExObj = dynamic_cast<CCObjectExtension*>(topObject);
+    CCObject *topTopObj = colorArray->objectAtIndex(gidToIndex - 14);
+    CCObjectExtension *topTopEx = dynamic_cast<CCObjectExtension*>(topTopObj);
+    CCObject *bottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomExObj = dynamic_cast<CCObjectExtension*>(bottomObject);
+    CCObject *bottomBottomObject = colorArray->objectAtIndex(gidToIndex + 7);
+    CCObjectExtension *bottomBottomEx = dynamic_cast<CCObjectExtension*>(bottomBottomObject);
+    if (topExObj->getID() == typeID && topTopEx->getID() == typeID &&
+        bottomExObj->getID() == typeID && bottomBottomEx->getID() == typeID) return true;
+    return false;
+}
+
+#pragma mark Array
+
+void TakasuPoppo::addBlocksToArray() {
+    for (int i = 0; i < 49; i ++) {
+        CCObjectExtension *exObj = new CCObjectExtension(0, 0, NULL, ccp(0, 0), ccp(0, 0));
+        colorArray->addObject(exObj);
+    }
+}
+
+void TakasuPoppo::setValuesForExObj(CCObjectExtension *exObj, int colorID, int gid, CCSprite *sprite, CCPoint position, CCPoint coordination) {
+    exObj->setID(colorID);
+    exObj->setGid(gid);
+    exObj->setSprite(sprite);
+    exObj->setPosition(position);
+    exObj->setCoordination(coordination);
+    
+    CCSprite *toMoveSprite = exObj->getSprite();
+    toMoveSprite->runAction(CCMoveTo::create(0.1, exObj->getPosition()));
+}
+
+void TakasuPoppo::checkAndAddToRemove() {
+    CCObject *object;
+    CCARRAY_FOREACH(colorArray, object) {
+        CCObjectExtension *exObj = dynamic_cast<CCObjectExtension*>(object);
+        int gid = exObj->getGid();
+        int id = exObj->getID();
+        if (TakasuPoppo::isBlockMatched(gid, id)) {
+            toDestroyArray->addObject(exObj);
+        }
+    }
+}
+
+void TakasuPoppo::removeObjectsFromDestroyArray() {
+    if (toDestroyArray->count() > 0) {
+        CCObject *object;
+        CCARRAY_FOREACH(toDestroyArray, object) {
+            CCObjectExtension *exObj = dynamic_cast<CCObjectExtension*>(object);
+            CCSprite *toRemoveSprite = exObj->getSprite();
+            exObj->setID(7);
+            exObj->setSprite(NULL);
+            if (toRemoveSprite)toRemoveSprite->removeFromParentAndCleanup(true);
+            TakasuPoppo::onRemoveMoveTiles(exObj);
+            if (gridOn)TakasuPoppo::refresh();
+        }
+    }
+}
+
+void TakasuPoppo::onRemoveMoveTiles(CCObjectExtension *exObj) {
+    
+    
 }
 
 #pragma mark Debug
